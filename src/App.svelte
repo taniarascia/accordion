@@ -35,6 +35,10 @@
     p: { row: 3, column: 9 },
     '[': { row: 3, column: 10 },
   }
+  const audio = new AudioContext()
+  const gainNode = audio.createGain()
+  gainNode.gain.value = 0.3
+  gainNode.connect(audio.destination)
 
   // F - B♭ - E♭
   const tone = {
@@ -77,7 +81,7 @@
   ]
   const two = [
     // Pull
-    { id: '2-1-pull', name: 'Gb', frequency: tone.Gb[4] },
+    { id: '2-1-pull', name: 'G♭', frequency: tone.Gb[4] },
     { id: '2-2-pull', name: 'A', frequency: tone.A[3] },
     { id: '2-3-pull', name: 'C', frequency: tone.C[4] },
     { id: '2-4-pull', name: 'E♭', frequency: tone.Eb[4] },
@@ -132,40 +136,19 @@
   let activeButtonIdMap = {}
 
   function playTone(id) {
-    const audioContext = new AudioContext({
-      latencyHint: 'interactive',
-      sampleRate: 48000,
-    })
-
-    const gainNode = audioContext.createGain()
-    gainNode.gain.value = 0.6
-    gainNode.connect(audioContext.destination)
-
-    const oscillator = audioContext.createOscillator()
-    oscillator.type = 'sine'
-    oscillator.connect(gainNode)
     const { frequency } = buttonIdMap[id]
-
+    const oscillator = audio.createOscillator()
+    oscillator.type = 'square'
+    oscillator.connect(gainNode)
     oscillator.frequency.value = frequency
     oscillator.start()
 
-    return { oscillator, audioContext, gainNode }
+    return { oscillator }
   }
 
   function stopTone(id) {
-    const { audioData } = activeButtonIdMap[id]
-    audioData.oscillator.stop()
-    // audioData.gainNode.gain.setValueAtTime(
-    //   audioData.gainNode.gain.value,
-    //   audioData.audioContext.currentTime
-    // )
-    // audioData.gainNode.gain.exponentialRampToValueAtTime(
-    //   0.0001,
-    //   audioData.audioContext.currentTime + 0.03
-    // )
-    // setTimeout(() => {
-    //   audioData.oscillator.stop()
-    // }, 100)
+    const { oscillator } = activeButtonIdMap[id]
+    oscillator.stop()
   }
 
   // function handlePressNote(id) {
@@ -184,7 +167,10 @@
   // }
 
   function handleKeyPressNote(e) {
-    console.log(e.key)
+    if (e.key === '`') {
+      return (direction = 'push')
+    }
+
     const buttonMapData = keyMap[e.key]
 
     if (buttonMapData) {
@@ -192,14 +178,18 @@
       const id = `${row}-${column}-${direction}`
 
       if (!activeButtonIdMap[id]) {
-        const audioData = playTone(id)
+        const { oscillator } = playTone(id)
 
-        activeButtonIdMap[id] = { id, audioData }
+        activeButtonIdMap[id] = { oscillator }
       }
     }
   }
 
   function handleKeyUpNote(e) {
+    if (e.key === '`') {
+      return (direction = 'pull')
+    }
+
     const buttonMapData = keyMap[e.key]
 
     if (buttonMapData) {
@@ -218,24 +208,29 @@
 <svelte:body on:keypress={handleKeyPressNote} on:keyup={handleKeyUpNote} />
 
 <main>
-  <h1>Diatonic Accordion App</h1>
+  <h1>Diatonic Keyboard</h1>
+  <h2>Play the diatonic button accordion with your computer keyboard!</h2>
 
   <div class="flex layout">
-    <div class="flex">
-      <div>
-        <h3>Direction</h3>
-        <select bind:value={direction} on:change={handleChangeDirection}>
-          <option value="pull" selected={direction === 'pull'}>Pull</option>
-          <option value="push" selected={direction === 'push'}>Push</option>
-        </select>
+    <div>
+      <div class="flex">
+        <div>
+          <h3>Direction</h3>
+          <select bind:value={direction} on:change={handleChangeDirection}>
+            <option value="pull" selected={direction === 'pull'}>Pull</option>
+            <option value="push" selected={direction === 'push'}>Push</option>
+          </select>
+        </div>
+
+        <div>
+          <h3>Tuning</h3>
+          <select>
+            <option value="fbe" selected><h2>F - B♭ - E♭</h2></option>
+          </select>
+        </div>
       </div>
 
-      <div>
-        <h3>Tuning</h3>
-        <select>
-          <option value="fbe" selected><h2>F - B♭ - E♭</h2></option>
-        </select>
-      </div>
+      <div><h2>How to play</h2></div>
     </div>
 
     <div class="accordion-layout">
@@ -243,7 +238,7 @@
         <div class="row {row}">
           <h3>{row}</h3>
           {#each layout[row].filter(({ id }) => id.includes(direction)) as button}
-            <div class="circle">
+            <div class="circle" id={button.id}>
               {button.name}
             </div>
           {/each}
@@ -261,6 +256,8 @@
   }
 
   h1 {
+    margin-top: 0.2rem;
+    font-size: 2.3rem;
     font-weight: 500;
   }
 
@@ -300,7 +297,8 @@
     cursor: pointer;
   }
 
-  .circle:active {
+  .circle:active,
+  .circle.active {
     background: linear-gradient(to bottom, #f7f7f7, #e7e7e7);
     box-shadow: 0px 1px 1px #666, inset 0px 2px 3px #fff;
     cursor: pointer;
