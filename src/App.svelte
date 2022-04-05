@@ -1,5 +1,4 @@
 <script>
-  // https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API/Simple_synth
   // F - B♭ - E♭
 
   const map = {
@@ -51,7 +50,7 @@
   const three = {
     pull: [
       { id: '3-1', name: 'B', frequency: 0 },
-      { id: '3-2', name: 'D', frequency: 0 },
+      { id: '3-2', name: 'D', frequency: map.D[3] },
       { id: '3-3', name: 'F', frequency: 0 },
       { id: '3-4', name: 'A♭', frequency: 0 },
       { id: '3-5', name: 'C', frequency: 0 },
@@ -67,7 +66,7 @@
   const rows = ['one', 'two', 'three']
   let currentlyPlaying = []
 
-  function playTone(id) {
+  function playTone(id, row, direction) {
     const audioContext = new AudioContext({
       latencyHint: 'interactive',
       sampleRate: 48000,
@@ -80,7 +79,7 @@
     const oscillator = audioContext.createOscillator()
     oscillator.type = 'sine'
     oscillator.connect(gainNode)
-    const { frequency } = two.pull.find((data) => data.id === id)
+    const { frequency } = layout[row][direction].find((data) => data.id === id)
 
     oscillator.frequency.value = frequency
     oscillator.start()
@@ -89,6 +88,7 @@
   }
 
   function stopTone(id) {
+    console.log(id)
     const { audioData } = currentlyPlaying.find((button) => button.id === id)
     audioData.gainNode.gain.setValueAtTime(
       audioData.gainNode.gain.value,
@@ -96,11 +96,11 @@
     )
     audioData.gainNode.gain.exponentialRampToValueAtTime(
       0.0001,
-      audioData.audioContext.currentTime + 0.05
+      audioData.audioContext.currentTime + 0.03
     )
     setTimeout(() => {
       audioData.oscillator.stop()
-    }, 500)
+    }, 100)
   }
 
   function handlePressNote(id, row, direction) {
