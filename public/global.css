@@ -12,6 +12,7 @@ body {
 }
 
 body {
+  background: #ddd;
   color: #333;
   margin: 0;
   padding: 8px;
@@ -42,12 +43,11 @@ select,
 textarea {
   font-family: inherit;
   font-size: inherit;
-  -webkit-padding: 0.4em 0;
-  padding: 0.4em;
-  margin: 0 0 0.5em 0;
-  box-sizing: border-box;
+  -webkit-padding: 0.5rem 0;
+  padding: 0.5rem;
+  margin: 0 0 0.5rem 0;
   border: 1px solid #ccc;
-  border-radius: 2px;
+  border-radius: 6px;
 }
 
 input:disabled {
@@ -70,4 +70,13 @@ button:not(:disabled):active {
 
 button:focus {
   border-color: #666;
+}
+
+.flex {
+  display: flex;
+  gap: 1rem;
+}
+
+.layout {
+  justify-content: space-between;
 }
