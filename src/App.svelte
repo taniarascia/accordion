@@ -208,11 +208,10 @@
 <svelte:body on:keypress={handleKeyPressNote} on:keyup={handleKeyUpNote} />
 
 <main>
-  <h1>Diatonic Keyboard</h1>
-  <h2>Play the diatonic button accordion with your computer keyboard!</h2>
-
   <div class="flex layout">
     <div>
+      <h1>Diatonic Keyboard</h1>
+      <h2>Play the diatonic button accordion with your computer keyboard!</h2>
       <div class="flex">
         <div>
           <h3>Direction</h3>
@@ -226,17 +225,26 @@
           <h3>Tuning</h3>
           <select>
             <option value="fbe" selected><h2>F - B♭ - E♭</h2></option>
+            <option value="nope" disabled><h2>No more yet!</h2></option>
           </select>
         </div>
       </div>
 
-      <div><h2>How to play</h2></div>
+      <div>
+        <h2>How to play</h2>
+        <ul>
+          <li>Row 1 starts with <kbd>z</kbd> and ends with <kbd>,</kbd></li>
+          <li>Row 2 starts with <kbd>a</kbd> and ends with <kbd>;</kbd></li>
+          <li>Row 3 starts with <kbd>w</kbd> and ends with <kbd>[</kbd></li>
+          <li>Press <kbd>`</kbd> to toggle between pushing and pulling the bellows</li>
+        </ul>
+      </div>
     </div>
 
     <div class="accordion-layout">
       {#each rows as row}
         <div class="row {row}">
-          <h3>{row}</h3>
+          <h4>{row}</h4>
           {#each layout[row].filter(({ id }) => id.includes(direction)) as button}
             <div class="circle" id={button.id}>
               {button.name}
@@ -251,25 +259,42 @@
 <style>
   main {
     margin: 0 auto;
-    max-width: 600px;
-    text-align: center;
+    max-width: 700px;
   }
 
   h1 {
-    margin-top: 0.2rem;
     font-size: 2.3rem;
-    font-weight: 500;
+    font-weight: 600;
   }
 
   h3 {
     font-size: 0.9rem;
-    font-weight: 600;
+    font-weight: 500;
     text-transform: uppercase;
+    border-bottom: 1px solid #c0c0c0;
+    padding-bottom: 0.5rem;
+  }
+
+  h4 {
+    font-size: 0.8rem;
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+
+  .flex {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .layout {
+    justify-content: space-between;
+    gap: 2rem;
   }
 
   .accordion-layout {
     display: flex;
     justify-content: center;
+    text-align: center;
   }
 
   .row.one,
