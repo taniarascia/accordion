@@ -1,5 +1,5 @@
 {
-  "name": "svelte-app",
+  "name": "diatonic-keyboard-app",
   "version": "1.0.0",
   "private": true,
   "scripts": {

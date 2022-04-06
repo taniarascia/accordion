@@ -2,7 +2,7 @@
   import { keyMap, layout, buttonIdMap, rows, toggleBellows } from './data.js'
 
   // Audio
-  const audio = new AudioContext()
+  const audio = new (window.AudioContext || window.webkitAudioContext)()
   const gainNode = audio.createGain()
   gainNode.gain.value = 0.1
   gainNode.connect(audio.destination)
@@ -145,7 +145,7 @@
     </div>
 
     <div class="information">
-      <h1>Diatonic Keyboard</h1>
+      <h1>Diatonic Keyboard App</h1>
       <h2>Play the diatonic button accordion with your computer keyboard!</h2>
       <p>
         Made with 🪗 and 💾 by <a href="https://tania.dev" target="_blank">Tania</a>.<br />
