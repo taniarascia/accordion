@@ -24,3 +24,9 @@ npm run build
 - Add bass notes
 - Add CGF and EAD tunings
 - Add scales
+- Add bottom 3 notes
+
+## Bugs
+
+- Shift/caps lock while playing
+- Press p while focused on a select
