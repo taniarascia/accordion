@@ -123,7 +123,10 @@
 <main>
   <div class="layout">
     <div>
-      <div class="accordion-layout">
+      <div class="mobile-only">
+        <div class="banner">This app is only available on a desktop!</div>
+      </div>
+      <div class="desktop-only accordion-layout">
         {#each rows as row}
           <div class="row {row}">
             <h4>{row}</h4>
@@ -139,8 +142,9 @@
           </div>
         {/each}
       </div>
-      <div>
-        <h4 style="text-align: right">Bellows <code>→</code></h4>
+
+      <div class="desktop-only">
+        <h4 style="text-align: right;">Bellows <code>→</code></h4>
       </div>
     </div>
 
