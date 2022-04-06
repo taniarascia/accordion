@@ -20,6 +20,7 @@ export const keyMap = {
   k: { row: 2, column: 8 },
   l: { row: 2, column: 9 },
   ';': { row: 2, column: 10 },
+  "'": { row: 2, column: 11 },
   w: { row: 3, column: 1 },
   e: { row: 3, column: 2 },
   r: { row: 3, column: 3 },
