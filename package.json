@@ -6,7 +6,7 @@
     "build": "rollup -c",
     "dev": "rollup -c -w",
     "start": "sirv public --no-clear",
-    "build-for-github": "cp -r public/build docs && cp public/index.html docs && cp public/global.css docs && cp public/favicon.png docs"
+    "build-for-github": "cp -r public docs"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^17.0.0",
