@@ -126,6 +126,18 @@ export const three = [
   { id: '3-10-push', name: 'G', frequency: tone.G[6] },
 ]
 
+// Scales
+export const BbScale = [
+  ['1-3-pull', '1-4-pull'],
+  ['2-3-pull', '2-4-pull'],
+  ['3-2-pull', '3-3-pull'],
+  ['2-4-pull', '2-5-pull'],
+  ['3-3-pull', '2-6-pull'],
+  ['1-6-pull', '1-7-pull'],
+  ['2-6-pull', '2-7-pull'],
+  ['1-7-pull', '1-8-pull'],
+]
+
 export const layout = { one, two, three }
 export const buttonIdMap = [...one, ...two, ...three].reduce((acc, value) => {
   return { ...acc, [value.id]: value }

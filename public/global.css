@@ -266,6 +266,13 @@ h4 {
   background: rgba(0, 0, 0, 0.4);
 }
 
+h2.direction {
+  text-align: center;
+  color: #33ff66;
+  text-transform: capitalize;
+  font-weight: 500;
+}
+
 .desktop-only {
   display: none !important;
 }

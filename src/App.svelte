@@ -1,5 +1,9 @@
 <script>
-  import { keyMap, layout, buttonIdMap, rows, toggleBellows } from './data.js'
+  import { keyMap, layout, buttonIdMap, rows, toggleBellows, BbScale } from './data.js'
+
+  function sleep(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms))
+  }
 
   // Audio
   const audio = new (window.AudioContext || window.webkitAudioContext)()
@@ -111,6 +115,37 @@
     }
     activeButtonIdMap = {}
   }
+
+  async function playNotesInScale(idSet) {
+    for (const id of idSet) {
+      // handleToggleBellows('pull')
+      if (!activeButtonIdMap[id]) {
+        const { oscillator } = playTone(id)
+
+        activeButtonIdMap[id] = { oscillator, ...buttonIdMap[id] }
+      }
+    }
+
+    await sleep(500)
+
+    for (const id of idSet) {
+      stopTone(id)
+      // Must be reassigned in Svelte
+      const newActiveButtonIdMap = { ...activeButtonIdMap }
+      delete newActiveButtonIdMap[id]
+      activeButtonIdMap = newActiveButtonIdMap
+    }
+  }
+
+  const playBbScale = async () => {
+    const reverse = [...BbScale].reverse()
+    reverse.shift()
+    const BbScaleBackwards = [...BbScale, ...reverse]
+
+    for (const idSet of BbScaleBackwards) {
+      await playNotesInScale(idSet)
+    }
+  }
 </script>
 
 <svelte:body
@@ -146,6 +181,11 @@
         </div>
 
         <div>
+          <h3>Scales</h3>
+          <button on:click={playBbScale}>B♭ Scale</button>
+        </div>
+
+        <div>
           <h3>Credits</h3>
           <p>
             Made with 💾 by <a href="https://tania.dev" target="_blank">Tania</a>.<br />
@@ -173,6 +213,7 @@
       <div class="mobile-only">
         <div class="banner">This app is only available on a desktop!</div>
       </div>
+      <h2 class="direction">{direction}</h2>
       <div class="desktop-only accordion-layout">
         {#each rows as row}
           <div class="row {row}">
