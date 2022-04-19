@@ -1,12 +1,12 @@
 {
-  "name": "diatonic-keyboard-app",
+  "name": "keyboard-accordion",
   "version": "1.0.0",
   "private": true,
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
     "start": "sirv public --no-clear",
-    "build-for-github": "cp -r public/build docs"
+    "build-for-github": "cp -r public/build docs && cp public/index.html docs && cp public/global.css docs"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^17.0.0",
