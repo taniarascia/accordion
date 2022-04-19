@@ -213,7 +213,7 @@
       <div class="mobile-only">
         <div class="banner">This app is only available on a desktop!</div>
       </div>
-      <h2 class="direction">{direction}</h2>
+      <h2 class="desktop-only direction">{direction}</h2>
       <div class="desktop-only accordion-layout">
         {#each rows as row}
           <div class="row {row}">
