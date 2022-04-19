@@ -154,7 +154,7 @@
         </div>
       </div>
 
-      <div class="information">
+      <div class="information desktop-only">
         <div>
           <h3>Notes being played</h3>
           <div class="currently-playing">
