@@ -2,6 +2,8 @@
 
 Play the diatonic button accordion with your computer keyboard!
 
+![](./screenshot.png)
+
 ## Todo
 
 - Add bass notes
