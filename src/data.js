@@ -133,4 +133,4 @@ export const buttonIdMap = [...one, ...two, ...three].reduce((acc, value) => {
 
 export const rowMap = { 1: 'one', 2: 'two', 3: 'three' }
 export const rows = Object.values(rowMap)
-export const toggleBellows = '`'
+export const toggleBellows = '1'

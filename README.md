@@ -1,6 +1,13 @@
-# Diatonic Keyboard
+# Keyboard Accordion
 
 Play the diatonic button accordion with your computer keyboard!
+
+## Todo
+
+- Add bass notes
+- Add CGF and EAD tunings
+- Add scales
+- Add bottom 3 notes
 
 ## Get started
 
@@ -18,15 +25,3 @@ To create an optimised version of the app:
 ```bash
 npm run build
 ```
-
-## Todo
-
-- Add bass notes
-- Add CGF and EAD tunings
-- Add scales
-- Add bottom 3 notes
-
-## Bugs
-
-- Shift/caps lock while playing
-- Press p while focused on a select

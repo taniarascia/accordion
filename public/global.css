@@ -4,14 +4,21 @@
   box-sizing: border-box;
 }
 
+html {
+  background: #110033;
+}
+
 html,
 body {
   -webkit-font-smoothing: antialiased;
 }
 
 body {
-  background: #ddd;
-  color: #333;
+  display: flex;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(to top right, #060014, #110033);
+  color: rgba(255, 255, 255, 0.9);
   margin: 0;
   padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell,
@@ -20,7 +27,7 @@ body {
 }
 
 a {
-  color: rgb(0, 100, 200);
+  color: #33ff66;
   text-decoration: none;
 }
 
@@ -28,8 +35,9 @@ a:hover {
   text-decoration: underline;
 }
 
-a:visited {
-  color: rgb(0, 80, 160);
+p {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
 }
 
 label {
@@ -44,7 +52,7 @@ textarea {
   font-size: inherit;
   -webkit-padding: 0.5rem 0;
   padding: 0.5rem;
-  margin: 0 0 0.5rem 0;
+  margin: 0 0 1.5rem 0;
   border: 1px solid #ccc;
   border-radius: 6px;
 }
@@ -101,27 +109,43 @@ kbd {
 
 ul {
   margin-left: 0;
+  margin-bottom: 1.5rem;
   padding-left: 1rem;
+}
+
+li {
+  margin-bottom: 0.25rem;
 }
 
 main {
   margin: 0 auto;
-  max-width: 850px;
+  max-width: 900px;
   padding: 0 1rem;
 }
 
-h1 {
+h1,
+h2,
+h3,
+h4 {
   margin-top: 0;
-  font-size: 2.3rem;
-  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: white;
+}
+
+h1 {
+  font-size: 1.6rem;
+  font-weight: 400;
+}
+
+h2 {
+  font-size: 1.3rem;
+  font-weight: 300;
 }
 
 h3 {
   font-size: 0.9rem;
   font-weight: 500;
   text-transform: uppercase;
-  border-bottom: 1px solid #c0c0c0;
-  padding-bottom: 0.5rem;
 }
 
 h4 {
@@ -148,18 +172,28 @@ h4 {
   }
 }
 
+.keyboard-side,
+.information-side {
+  padding: 1rem;
+}
+
+.keyboard-side {
+  align-self: center;
+}
+
 .information {
   padding: 1.5rem;
-  background: linear-gradient(to top, #f7f7f7, #e7e7e7);
-  border-radius: 10px;
-  box-shadow: 0px 2px 6px #ccc, inset 0px 2px 3px #fff;
-  margin: 1rem 0;
+  background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.2));
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
 }
 
 .accordion-layout {
   display: flex;
   justify-content: center;
   text-align: center;
+  margin-bottom: 1rem;
 }
 
 .row.one,
@@ -176,24 +210,22 @@ h4 {
   width: 60px;
   margin-bottom: 10px;
   background: linear-gradient(to top, #f7f7f7, #e7e7e7);
-  box-shadow: 0px 3px 7px #aaa, inset 0px 2px 3px #fff;
+  box-shadow: 0px 6px rgba(255, 255, 255, 0.4);
   color: #444;
   font-weight: 600;
+  cursor: pointer;
 }
 
 .circle:hover {
-  background: linear-gradient(to bottom, #f7f7f7, #e7e7e7);
-  box-shadow: 0px 3px 3px #999, inset 0px 2px 3px #fff;
+  background: linear-gradient(to bottom, #cac8c8, #e7e7e7);
+  box-shadow: 0px 6px rgba(255, 255, 255, 0.3);
   cursor: pointer;
 }
 
 .circle:active,
 .circle.active {
-  background: linear-gradient(to bottom, #f7f7f7, #e7e7e7);
-  box-shadow: 0px 2px 1px #444, inset 0px 2px 3px #fff;
-  cursor: pointer;
-  border-bottom: 2px solid #33ff66;
-  text-shadow: 2px 2px #33ff66;
+  background: linear-gradient(to bottom, #33ff66, #56ea7b);
+  box-shadow: 0px 6px rgba(255, 255, 255, 0.2);
 }
 
 .currently-playing {

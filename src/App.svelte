@@ -66,7 +66,8 @@
       return
     }
 
-    const buttonMapData = keyMap[e.key]
+    const key = `${e.key}`.toLowerCase() || e.key
+    const buttonMapData = keyMap[key]
 
     if (buttonMapData) {
       const { row, column } = buttonMapData
@@ -82,7 +83,8 @@
       return
     }
 
-    const buttonMapData = keyMap[e.key]
+    const key = `${e.key}`.toLowerCase() || e.key
+    const buttonMapData = keyMap[key]
 
     if (buttonMapData) {
       const { row, column } = buttonMapData
@@ -98,15 +100,11 @@
     }
   }
 
-  function handleChangeDirection(event) {
-    direction = event.target.value
-  }
-
   const handleClickNote = (id) => {
     updateActiveButtonMap(id)
   }
 
-  const handleClearAllNotes = (id) => {
+  const handleClearAllNotes = () => {
     for (const [keyId, keyValues] of Object.entries(activeButtonIdMap)) {
       // Remove existing value
       keyValues.oscillator.stop()
@@ -122,7 +120,56 @@
 
 <main>
   <div class="layout">
-    <div>
+    <div class="information-side">
+      <h1>Keyboard Accordion</h1>
+      <h2>Play the diatonic button accordion with your computer keyboard!</h2>
+      <div class="information">
+        <div class="flex">
+          <div>
+            <h3>Tuning</h3>
+            <select>
+              <option value="fbe" selected><h2>FB♭E♭ (Fa)</h2></option>
+              <option value="gcf" disabled><h2>GCF (Sol) Not yet</h2></option>
+              <option value="gcf" disabled><h2>EAD (Mi) Not yet</h2></option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <h3>How to play</h3>
+          <ul>
+            <li>Hold down <kbd>1</kbd> to push the bellows. Default is pull.</li>
+            <li>Row 1 starts with <kbd>z</kbd> and ends with <kbd>,</kbd> (comma)</li>
+            <li>Row 2 starts with <kbd>a</kbd> and ends with <kbd>'</kbd> (apostrophe)</li>
+            <li>Row 3 starts with <kbd>w</kbd> and ends with <kbd>[</kbd> (left bracket)</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3>Credits</h3>
+          <p>
+            Made with 💾 by <a href="https://tania.dev" target="_blank">Tania</a>.<br />
+            <a href="https://github.com/taniarascia/accordion" target="_blank">Open source</a>.
+          </p>
+        </div>
+      </div>
+
+      <div class="information">
+        <div>
+          <h3>Notes being played</h3>
+          <div class="currently-playing">
+            {#each Object.entries(activeButtonIdMap) as [id, value]}
+              <div class="flex col">
+                <div class="circle note">{value.name}</div>
+                <div><small>Row: {id.split('-')[0]}<br /> Col: {id.split('-')[1]}</small></div>
+              </div>
+            {/each}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="keyboard-side">
       <div class="mobile-only">
         <div class="banner">This app is only available on a desktop!</div>
       </div>
@@ -143,65 +190,8 @@
         {/each}
       </div>
 
-      <div class="desktop-only">
-        <h4 style="text-align: right;">Bellows <code>→</code></h4>
-      </div>
-    </div>
-
-    <div class="information">
-      <h1>Diatonic Keyboard App</h1>
-      <h2>Play the diatonic button accordion with your computer keyboard!</h2>
-      <p>
-        Made with 🪗 and 💾 by <a href="https://tania.dev" target="_blank">Tania</a>.<br />
-        <a href="https://github.com/taniarascia/accordion" target="_blank">Open source</a>.
-      </p>
-      <div class="flex">
-        <div>
-          <h3>Direction</h3>
-          <select bind:value={direction} on:change={handleChangeDirection}>
-            <option value="pull" selected={direction === 'pull'}>Pull</option>
-            <option value="push" selected={direction === 'push'}>Push</option>
-          </select>
-        </div>
-
-        <div>
-          <h3>Tuning</h3>
-          <select>
-            <option value="fbe" selected><h2>FB♭E♭ (Fa)</h2></option>
-            <option value="gcf" disabled><h2>GCF (Sol) Not yet</h2></option>
-            <option value="gcf" disabled><h2>EAD (Mi) Not yet</h2></option>
-          </select>
-        </div>
-
-        <div>
-          <h3>Something broke?</h3>
-          <button on:click={handleClearAllNotes}>Reset</button>
-        </div>
-      </div>
-
-      <div>
-        <h2>How to play</h2>
-        <ul>
-          <li>Press <kbd>`</kbd> to toggle pushing the bellows</li>
-          <li>Row 1 starts with <kbd>z</kbd> and ends with <kbd>,</kbd> (comma)</li>
-          <li>Row 2 starts with <kbd>a</kbd> and ends with <kbd>'</kbd> (apostrophe)</li>
-          <li>Row 3 starts with <kbd>w</kbd> and ends with <kbd>[</kbd> (left bracket)</li>
-          <li>
-            Make sure you're not pressing any other buttons (<kbd>shift</kbd>, <kbd>caps lock</kbd>)
-          </li>
-        </ul>
-      </div>
-
-      <div>
-        <h2>Notes</h2>
-        <div class="currently-playing">
-          {#each Object.entries(activeButtonIdMap) as [id, value]}
-            <div class="flex col">
-              <div class="circle note">{value.name}</div>
-              <div><small>Row: {id.split('-')[0]}<br /> Col: {id.split('-')[1]}</small></div>
-            </div>
-          {/each}
-        </div>
+      <div class="desktop-only" style="justify-content: flex-end">
+        <h4>Bellows <code>➔</code></h4>
       </div>
     </div>
   </div>
