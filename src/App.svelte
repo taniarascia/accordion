@@ -1,9 +1,14 @@
 <script>
-  import { keyMap, layout, buttonIdMap, rows, toggleBellows, BbScale } from './data.js'
-
-  function sleep(ms) {
-    return new Promise((resolve) => setTimeout(resolve, ms))
-  }
+  import {
+    keyMap,
+    sleep,
+    layout,
+    buttonIdMap,
+    rows,
+    rowTones,
+    toggleBellows,
+    scales,
+  } from './data.js'
 
   // Audio
   const audio = new (window.AudioContext || window.webkitAudioContext)()
@@ -13,7 +18,12 @@
 
   // State
   let direction = 'pull'
+  let tuning = 'FBE'
   let activeButtonIdMap = {}
+
+  function handleChangeTuning(e) {
+    tuning = e.target.value
+  }
 
   // Handlers
   function playTone(id) {
@@ -57,6 +67,7 @@
   }
 
   function updateActiveButtonMap(id) {
+    console.log(id)
     if (!activeButtonIdMap[id]) {
       const { oscillator } = playTone(id)
 
@@ -126,7 +137,7 @@
       }
     }
 
-    await sleep(500)
+    await sleep(600)
 
     for (const id of idSet) {
       stopTone(id)
@@ -137,12 +148,12 @@
     }
   }
 
-  const playBbScale = async () => {
-    const reverse = [...BbScale].reverse()
+  const playScale = (scale, type) => async () => {
+    const reverse = [...scales[scale][type]].reverse()
     reverse.shift()
-    const BbScaleBackwards = [...BbScale, ...reverse]
+    const scaleBackAndForth = [...scales[scale][type], ...reverse]
 
-    for (const idSet of BbScaleBackwards) {
+    for (const idSet of scaleBackAndForth) {
       await playNotesInScale(idSet)
     }
   }
@@ -158,20 +169,10 @@
     <div class="information-side">
       <h1>Keyboard Accordion</h1>
       <h2>Play the diatonic button accordion with your computer keyboard!</h2>
-      <div class="information">
-        <div class="flex">
-          <div>
-            <h3>Tuning</h3>
-            <select>
-              <option value="fbe" selected><h2>FB♭E♭ (Fa)</h2></option>
-              <option value="gcf" disabled><h2>GCF (Sol) Not yet</h2></option>
-              <option value="gcf" disabled><h2>EAD (Mi) Not yet</h2></option>
-            </select>
-          </div>
-        </div>
 
+      <div class="information">
         <div>
-          <h3>How to play</h3>
+          <h3>How to use</h3>
           <ul>
             <li>Hold down <kbd>1</kbd> to push the bellows. Default is pull.</li>
             <li>Row 1 starts with <kbd>z</kbd> and ends with <kbd>,</kbd> (comma)</li>
@@ -180,17 +181,42 @@
           </ul>
         </div>
 
-        <div>
-          <h3>Scales</h3>
-          <button on:click={playBbScale}>B♭ Scale</button>
+        <div class="flex">
+          <div>
+            <h3>Tuning</h3>
+            <select on:click={handleChangeTuning}>
+              <option value="FBE" selected><h2>FB♭E♭ (Fa)</h2></option>
+              <option value="GCF" disabled><h2>GCF (Sol) Not yet</h2></option>
+              <option value="EAD" disabled><h2>EAD (Mi) Not yet</h2></option>
+            </select>
+          </div>
         </div>
 
         <div>
-          <h3>Credits</h3>
-          <p>
-            Made with 💾 by <a href="https://tania.dev" target="_blank">Tania</a>.<br />
-            <a href="https://github.com/taniarascia/accordion" target="_blank">Open source</a>.
-          </p>
+          <h3>Major Scales</h3>
+          <div class="scales">
+            <div class="scale">
+              <h4>F Major</h4>
+              <div>
+                <button on:click={playScale('F', 'notes')}>Notes</button>
+                <button on:click={playScale('F', 'thirds')}>Thirds</button>
+              </div>
+            </div>
+            <div class="scale">
+              <h4>B♭ Major</h4>
+              <div>
+                <button on:click={playScale('Bb', 'notes')}>Notes</button>
+                <button on:click={playScale('Bb', 'thirds')}>Thirds</button>
+              </div>
+            </div>
+            <div class="scale">
+              <h4>E♭ Major</h4>
+              <div>
+                <button on:click={playScale('Eb', 'notes')}>Notes</button>
+                <button on:click={playScale('Eb', 'thirds')}>Thirds</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -213,14 +239,14 @@
       <div class="mobile-only">
         <div class="banner">This app is only available on a desktop!</div>
       </div>
-      <h2 class="desktop-only direction">{direction}</h2>
+      <h2 class="desktop-only direction {direction}">{direction}</h2>
       <div class="desktop-only accordion-layout">
         {#each rows as row}
           <div class="row {row}">
-            <h4>{row}</h4>
+            <h4>{rowTones[tuning][row]}<br />{row}</h4>
             {#each layout[row].filter(({ id }) => id.includes(direction)) as button}
               <div
-                class={`circle ${activeButtonIdMap[button.id] ? 'active' : ''}`}
+                class={`circle ${activeButtonIdMap[button.id] ? 'active' : ''} ${direction} `}
                 id={button.id}
                 on:mousedown={handleClickNote(button.id)}
               >
@@ -236,4 +262,11 @@
       </div>
     </div>
   </div>
+
+  <footer>
+    <p>
+      Made with 💾 by <a href="https://tania.dev" target="_blank">Tania</a>.<br />
+      <a href="https://github.com/taniarascia/accordion" target="_blank">Open source</a>.
+    </p>
+  </footer>
 </main>

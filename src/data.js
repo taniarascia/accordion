@@ -1,3 +1,7 @@
+export function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms))
+}
+
 // Map computer keys to accordion button layout
 export const keyMap = {
   z: { row: 1, column: 1 },
@@ -76,7 +80,7 @@ export const one = [
 
 export const two = [
   // Pull
-  { id: '2-1-pull', name: 'G♭', frequency: tone.Gb[4] },
+  { id: '2-1-pull', name: 'F♯', frequency: tone.Gb[4] },
   { id: '2-2-pull', name: 'A', frequency: tone.A[3] },
   { id: '2-3-pull', name: 'C', frequency: tone.C[4] },
   { id: '2-4-pull', name: 'E♭', frequency: tone.Eb[4] },
@@ -127,16 +131,74 @@ export const three = [
 ]
 
 // Scales
-export const BbScale = [
-  ['1-3-pull', '1-4-pull'],
-  ['2-3-pull', '2-4-pull'],
-  ['3-2-pull', '3-3-pull'],
-  ['2-4-pull', '2-5-pull'],
-  ['3-3-pull', '2-6-pull'],
-  ['1-6-pull', '1-7-pull'],
-  ['2-6-pull', '2-7-pull'],
-  ['1-7-pull', '1-8-pull'],
-]
+export const scales = {
+  F: {
+    notes: [
+      ['3-3-pull'],
+      ['1-6-pull'],
+      ['2-6-pull'],
+      ['1-7-pull'],
+      ['2-7-pull'],
+      ['3-6-pull'],
+      ['1-9-pull'],
+      ['3-7-pull'],
+    ],
+    thirds: [
+      ['2-6-pull', '3-3-pull'],
+      ['1-6-pull', '1-7-pull'],
+      ['2-6-pull', '2-7-pull'],
+      ['1-7-pull', '1-8-pull'],
+      ['1-9-pull', '2-7-pull'],
+      ['3-7-pull', '3-6-pull'],
+      ['1-9-pull', '1-10-pull'],
+      ['2-10-pull', '3-7-pull'],
+    ],
+  },
+  Bb: {
+    notes: [
+      ['1-3-pull'],
+      ['2-3-pull'],
+      ['3-2-pull'],
+      ['2-4-pull'],
+      ['3-3-pull'],
+      ['1-6-pull'],
+      ['2-6-pull'],
+      ['1-7-pull'],
+    ],
+    thirds: [
+      ['1-3-pull', '1-4-pull'],
+      ['2-3-pull', '2-4-pull'],
+      ['3-2-pull', '3-3-pull'],
+      ['2-4-pull', '2-5-pull'],
+      ['3-3-pull', '2-6-pull'],
+      ['1-6-pull', '1-7-pull'],
+      ['2-6-pull', '2-7-pull'],
+      ['1-7-pull', '1-8-pull'],
+    ],
+  },
+  Eb: {
+    notes: [
+      ['2-4-pull'],
+      ['3-3-pull'],
+      ['2-5-pull'],
+      ['3-4-pull'],
+      ['1-7-pull'],
+      ['2-7-pull'],
+      ['3-6-pull'],
+      ['2-8-pull'],
+    ],
+    thirds: [
+      ['2-5-pull', '2-4-pull'],
+      ['3-3-pull', '3-4-pull'],
+      ['2-5-pull', '1-7-pull'],
+      ['3-4-pull', '3-5-pull'],
+      ['1-7-pull', '1-8-pull'],
+      ['2-7-pull', '2-8-pull'],
+      ['3-6-pull', '3-7-pull'],
+      ['2-8-pull', '2-9-pull'],
+    ],
+  },
+}
 
 export const layout = { one, two, three }
 export const buttonIdMap = [...one, ...two, ...three].reduce((acc, value) => {
@@ -144,5 +206,6 @@ export const buttonIdMap = [...one, ...two, ...three].reduce((acc, value) => {
 }, {})
 
 export const rowMap = { 1: 'one', 2: 'two', 3: 'three' }
+export const rowTones = { FBE: { one: 'F', two: 'B♭', three: 'E♭' } }
 export const rows = Object.values(rowMap)
 export const toggleBellows = '1'

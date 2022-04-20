@@ -1,3 +1,8 @@
+:root {
+  --red: #f37272;
+  --green: #33ff66;
+}
+
 *,
 *::before,
 *::after {
@@ -25,7 +30,7 @@ body {
 }
 
 a {
-  color: #33ff66;
+  color: var(--green);
   text-decoration: none;
 }
 
@@ -50,9 +55,15 @@ textarea {
   font-size: inherit;
   -webkit-padding: 0.5rem 0;
   padding: 0.5rem;
-  margin: 0 0 1.5rem 0;
+  margin: 0 0 0.5rem 0;
   border: 1px solid #ccc;
   border-radius: 6px;
+}
+
+input,
+select,
+textarea {
+  margin-bottom: 1.5rem;
 }
 
 input:disabled {
@@ -60,18 +71,22 @@ input:disabled {
 }
 
 button {
-  color: #333;
-  background-color: #f4f4f4;
+  border: none;
+  background: linear-gradient(to bottom, white, #e7e7e7);
+  box-shadow: 0px 6px rgba(255, 255, 255, 0.4);
+  color: #222;
+  cursor: pointer;
+  font-weight: 600;
 }
 
 button:hover {
-  cursor: pointer;
-  background-color: #e0e0e0;
+  background: white;
+  box-shadow: 0px 6px rgba(255, 255, 255, 0.3);
 }
 
 button:active {
-  background-color: #d0d0d0;
-  border-color: #777;
+  background: linear-gradient(to bottom, var(--green), #56ea7b);
+  box-shadow: 0px 6px rgba(255, 255, 255, 0.2);
 }
 
 button:disabled {
@@ -80,6 +95,17 @@ button:disabled {
 
 button:not(:disabled):active {
   background-color: #ddd;
+}
+
+select {
+  background: rgba(0, 0, 0, 0.3);
+  color: white;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+select:focus {
+  outline: none;
+  border: 1px solid var(--green);
 }
 
 small {
@@ -117,7 +143,7 @@ li {
 
 main {
   margin: 0 auto;
-  max-width: 900px;
+  max-width: 1200px;
 }
 
 h1,
@@ -132,6 +158,7 @@ h4 {
 h1 {
   font-size: 1.6rem;
   font-weight: 400;
+  margin-bottom: 0.5rem;
 }
 
 h2 {
@@ -164,19 +191,19 @@ h4 {
 .layout {
   display: flex;
   flex-direction: column;
+  padding: 2rem 1rem 1rem;
+}
+
+footer {
+  padding: 1rem;
 }
 
 @media screen and (min-width: 600px) {
   .layout {
     flex-direction: row;
     justify-content: space-between;
-    gap: 1rem;
+    gap: 2.5rem;
   }
-}
-
-.keyboard-side,
-.information-side {
-  padding: 1rem;
 }
 
 .keyboard-side {
@@ -216,23 +243,30 @@ h4 {
   height: 60px;
   width: 60px;
   margin-bottom: 10px;
-  background: linear-gradient(to top, #f7f7f7, #e7e7e7);
+  background: linear-gradient(to bottom, white, #e7e7e7);
   box-shadow: 0px 6px rgba(255, 255, 255, 0.4);
-  color: #444;
+  color: #222;
   font-weight: 600;
   cursor: pointer;
 }
 
 .circle:hover {
-  background: linear-gradient(to bottom, #cac8c8, #e7e7e7);
+  background: white;
   box-shadow: 0px 6px rgba(255, 255, 255, 0.3);
   cursor: pointer;
 }
 
-.circle:active,
-.circle.active {
-  background: linear-gradient(to bottom, #33ff66, #56ea7b);
+.circle.pull:active,
+.circle.pull.active {
+  background: linear-gradient(to bottom, var(--green), #56ea7b);
   box-shadow: 0px 6px rgba(255, 255, 255, 0.2);
+}
+
+.circle.push:active,
+.circle.push.active {
+  background: linear-gradient(to bottom, var(--red), #f15050);
+  box-shadow: 0px 6px rgba(255, 255, 255, 0.2);
+  color: white;
 }
 
 .currently-playing {
@@ -267,10 +301,41 @@ h4 {
 }
 
 h2.direction {
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  color: #33ff66;
   text-transform: capitalize;
   font-weight: 500;
+}
+
+h2.direction.pull {
+  color: var(--green);
+}
+
+h2.direction.push {
+  color: var(--red);
+}
+
+.scales {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.scale {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.scale h4 {
+  text-align: center;
+  font-size: 1rem;
+  text-transform: none;
+  font-weight: 300;
+  margin-bottom: 1rem;
 }
 
 .desktop-only {
