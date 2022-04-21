@@ -37,6 +37,17 @@ export const keyMap = {
   '[': { row: 3, column: 10 },
 }
 
+export const bassKeyMap = {
+  2: { row: 1, column: 1 },
+  3: { row: 1, column: 2 },
+  4: { row: 1, column: 3 },
+  5: { row: 1, column: 4 },
+  6: { row: 2, column: 1 },
+  7: { row: 2, column: 2 },
+  8: { row: 2, column: 3 },
+  9: { row: 2, column: 4 },
+}
+
 export const tone = {
   C: [16.35, 32.7, 65.41, 130.81, 261.63, 523.25, 1046.5, 2093.0, 4186.01],
   Db: [17.32, 34.65, 69.3, 138.59, 277.18, 554.37, 1108.73, 2217.46, 4434.92],
@@ -130,6 +141,31 @@ export const three = [
   { id: '3-10-push', name: 'G', frequency: tone.G[6] },
 ]
 
+export const bassLayout = {
+  one: [
+    { id: '1-1-pull-bass', name: 'Gm', frequency: [tone.G[3], tone.Bb[4], tone.D[4]] },
+    { id: '1-2-pull-bass', name: 'g', frequency: tone.G[2] },
+    { id: '1-1-push-bass', name: 'D', frequency: [tone.D[3], tone.Gb[4], tone.A[4]] },
+    { id: '1-2-push-bass', name: 'd', frequency: tone.D[3] },
+
+    { id: '1-3-pull-bass', name: 'Cm', frequency: [tone.C[3], tone.Eb[4], tone.G[4]] },
+    { id: '1-4-pull-bass', name: 'c', frequency: tone.C[3] },
+    { id: '1-3-push-bass', name: 'G', frequency: [tone.C[3], tone.Eb[4], tone.G[4]] },
+    { id: '1-4-push-bass', name: 'g', frequency: tone.G[2] },
+  ],
+  two: [
+    { id: '2-1-pull-bass', name: 'C', frequency: [tone.C[3], tone.E[4], tone.G[4]] },
+    { id: '2-2-pull-bass', name: 'c', frequency: tone.C[3] },
+    { id: '2-1-push-bass', name: 'F', frequency: [tone.F[3], tone.A[4], tone.C[4]] },
+    { id: '2-2-push-bass', name: 'f', frequency: tone.F[3] },
+
+    { id: '2-3-pull-bass', name: 'F', frequency: [tone.F[3], tone.A[4], tone.C[4]] },
+    { id: '2-4-pull-bass', name: 'f', frequency: tone.F[3] },
+    { id: '2-3-push-bass', name: 'B♭', frequency: [tone.Bb[3], tone.D[4], tone.F[4]] },
+    { id: '2-4-push-bass', name: 'b♭', frequency: tone.Bb[3] },
+  ],
+}
+
 // Scales
 export const scales = {
   F: {
@@ -201,11 +237,15 @@ export const scales = {
 }
 
 export const layout = { one, two, three }
-export const buttonIdMap = [...one, ...two, ...three].reduce((acc, value) => {
-  return { ...acc, [value.id]: value }
-}, {})
-
+export const buttonIdMap = [...one, ...two, ...three, ...bassLayout.one, ...bassLayout.two].reduce(
+  (acc, value) => {
+    return { ...acc, [value.id]: value }
+  },
+  {}
+)
 export const rowMap = { 1: 'one', 2: 'two', 3: 'three' }
+export const bassRowMap = { 1: 'one', 2: 'two' }
 export const rowTones = { FBE: { one: 'F', two: 'B♭', three: 'E♭' } }
 export const rows = Object.values(rowMap)
+export const bassRows = Object.values(bassRowMap)
 export const toggleBellows = '1'

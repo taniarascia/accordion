@@ -207,12 +207,7 @@ footer {
 }
 
 .keyboard-side {
-  order: 1;
   align-self: center;
-}
-
-.information-side {
-  order: 2;
 }
 
 .information {
@@ -233,6 +228,11 @@ footer {
 .row.one,
 .row.three {
   margin-top: 35px;
+}
+
+.bass-side .row.one {
+  margin-top: 0;
+  margin-right: 0.5rem;
 }
 
 .circle {
@@ -289,12 +289,12 @@ footer {
 }
 
 .banner {
+  margin: 1rem;
   border: 1px solid #f15050;
   border-radius: 10px;
   padding: 1rem;
   font-size: 1.1rem;
   font-weight: 500;
-  margin: 0;
   text-align: center;
   color: #f37272;
   background: rgba(0, 0, 0, 0.4);
@@ -358,13 +358,5 @@ h2.direction.push {
 
   .mobile-only {
     display: none !important;
-  }
-
-  .keyboard-side {
-    order: 2;
-  }
-
-  .information-side {
-    order: 1;
   }
 }

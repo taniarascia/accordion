@@ -1,10 +1,13 @@
 <script>
   import {
     keyMap,
+    bassKeyMap,
     sleep,
     layout,
+    bassLayout,
     buttonIdMap,
     rows,
+    bassRows,
     rowTones,
     toggleBellows,
     scales,
@@ -28,18 +31,37 @@
   // Handlers
   function playTone(id) {
     const { frequency } = buttonIdMap[id]
-    const oscillator = audio.createOscillator()
-    oscillator.type = 'square'
-    oscillator.connect(gainNode)
-    oscillator.frequency.value = frequency
-    oscillator.start()
+    let oscillator
+
+    if (Array.isArray(frequency)) {
+      oscillator = frequency.map((hz) => {
+        const oscillator = audio.createOscillator()
+        oscillator.type = 'sawtooth'
+        oscillator.connect(gainNode)
+        oscillator.frequency.value = hz
+        oscillator.start()
+
+        return oscillator
+      })
+    } else {
+      oscillator = audio.createOscillator()
+      oscillator.type = 'sawtooth'
+      oscillator.connect(gainNode)
+      oscillator.frequency.value = frequency
+      oscillator.start()
+    }
 
     return { oscillator }
   }
 
   function stopTone(id) {
     const { oscillator } = activeButtonIdMap[id]
-    oscillator.stop()
+
+    if (Array.isArray(oscillator)) {
+      oscillator.forEach((osc) => osc?.stop())
+    } else {
+      oscillator?.stop()
+    }
   }
 
   function handleToggleBellows(newDirection) {
@@ -47,17 +69,26 @@
       direction = newDirection
 
       const newActiveButtonIdMap = { ...activeButtonIdMap }
+      let isBass = false
 
       // When switching the bellows
       for (const [keyId, keyValues] of Object.entries(activeButtonIdMap)) {
         // Remove existing value
-        keyValues.oscillator.stop()
-        // Must be reassigned in Svelte
 
+        if (Array.isArray(keyValues.oscillator)) {
+          isBass = true
+          keyValues.oscillator.forEach((hz) => hz?.stop())
+        } else {
+          keyValues.oscillator?.stop()
+        }
+
+        // Must be reassigned in Svelte
         delete newActiveButtonIdMap[keyId]
 
         // Add the reverse value
-        const reverseKeyId = `${keyId.split('-')[0]}-${keyId.split('-')[1]}-${newDirection}`
+        const reverseKeyId = `${keyId.split('-')[0]}-${keyId.split('-')[1]}-${newDirection}${
+          isBass ? '-bass' : ''
+        }`
         const { oscillator } = playTone(reverseKeyId)
 
         newActiveButtonIdMap[reverseKeyId] = { oscillator, ...buttonIdMap[reverseKeyId] }
@@ -67,7 +98,6 @@
   }
 
   function updateActiveButtonMap(id) {
-    console.log(id)
     if (!activeButtonIdMap[id]) {
       const { oscillator } = playTone(id)
 
@@ -88,7 +118,15 @@
       const { row, column } = buttonMapData
       const id = `${row}-${column}-${direction}`
 
-      updateActiveButtonMap(id)
+      return updateActiveButtonMap(id)
+    }
+
+    const bassButtonMapData = bassKeyMap[key]
+    if (bassButtonMapData) {
+      const { row, column } = bassButtonMapData
+      const id = `${row}-${column}-${direction}-bass`
+
+      return updateActiveButtonMap(id)
     }
   }
 
@@ -113,6 +151,21 @@
         activeButtonIdMap = newActiveButtonIdMap
       }
     }
+
+    const bassButtonMapData = bassKeyMap[key]
+
+    if (bassButtonMapData) {
+      const { row, column } = bassButtonMapData
+      const id = `${row}-${column}-${direction}-bass`
+
+      if (activeButtonIdMap[id]) {
+        stopTone(id)
+        // Must be reassigned in Svelte
+        const newActiveButtonIdMap = { ...activeButtonIdMap }
+        delete newActiveButtonIdMap[id]
+        activeButtonIdMap = newActiveButtonIdMap
+      }
+    }
   }
 
   const handleClickNote = (id) => {
@@ -122,7 +175,11 @@
   const handleClearAllNotes = () => {
     for (const [keyId, keyValues] of Object.entries(activeButtonIdMap)) {
       // Remove existing value
-      keyValues.oscillator.stop()
+      if (Array.isArray(keyValues.oscillator)) {
+        keyValues.oscillator.forEach((hz) => hz?.stop())
+      } else {
+        keyValues.oscillator?.stop()
+      }
     }
     activeButtonIdMap = {}
   }
@@ -165,7 +222,31 @@
   on:mouseup={handleClearAllNotes} />
 
 <main>
+  <div class="mobile-only">
+    <div class="banner">This app is only available on a desktop!</div>
+  </div>
+
   <div class="layout">
+    <div class="keyboard-side">
+      <h2 class="desktop-only direction {direction}">{direction}</h2>
+      <div class="desktop-only accordion-layout">
+        {#each rows as row}
+          <div class="row {row}">
+            <h4>{rowTones[tuning][row]}<br />{row}</h4>
+            {#each layout[row].filter(({ id }) => id.includes(direction)) as button}
+              <div
+                class={`circle ${activeButtonIdMap[button.id] ? 'active' : ''} ${direction} `}
+                id={button.id}
+                on:mousedown={handleClickNote(button.id)}
+              >
+                {button.name}
+              </div>
+            {/each}
+          </div>
+        {/each}
+      </div>
+    </div>
+
     <div class="information-side">
       <h1>Keyboard Accordion</h1>
       <h2>Play the diatonic button accordion with your computer keyboard!</h2>
@@ -235,16 +316,12 @@
       </div>
     </div>
 
-    <div class="keyboard-side">
-      <div class="mobile-only">
-        <div class="banner">This app is only available on a desktop!</div>
-      </div>
-      <h2 class="desktop-only direction {direction}">{direction}</h2>
+    <div class="bass-side">
+      <h2 class="desktop-only" style="margin: 6rem 0 1.5rem">Bass</h2>
       <div class="desktop-only accordion-layout">
-        {#each rows as row}
+        {#each bassRows as row}
           <div class="row {row}">
-            <h4>{rowTones[tuning][row]}<br />{row}</h4>
-            {#each layout[row].filter(({ id }) => id.includes(direction)) as button}
+            {#each bassLayout[row].filter(({ id }) => id.includes(direction)) as button}
               <div
                 class={`circle ${activeButtonIdMap[button.id] ? 'active' : ''} ${direction} `}
                 id={button.id}
@@ -255,10 +332,6 @@
             {/each}
           </div>
         {/each}
-      </div>
-
-      <div class="desktop-only" style="justify-content: flex-end">
-        <h4>Bellows <code>➔</code></h4>
       </div>
     </div>
   </div>
