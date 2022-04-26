@@ -106,12 +106,13 @@
   }
 
   function handleKeyPressNote(e) {
-    if (e.key === toggleBellows) {
+    const key = `${e.key}`.toLowerCase() || e.key
+
+    if (key === toggleBellows) {
       handleToggleBellows('push')
       return
     }
 
-    const key = `${e.key}`.toLowerCase() || e.key
     const buttonMapData = keyMap[key]
 
     if (buttonMapData) {
@@ -131,12 +132,13 @@
   }
 
   function handleKeyUpNote(e) {
-    if (e.key === toggleBellows) {
+    const key = `${e.key}`.toLowerCase() || e.key
+
+    if (key === toggleBellows) {
       handleToggleBellows('pull')
       return
     }
 
-    const key = `${e.key}`.toLowerCase() || e.key
     const buttonMapData = keyMap[key]
 
     if (buttonMapData) {
@@ -255,7 +257,7 @@
         <div>
           <h3>How to use</h3>
           <ul>
-            <li>Hold down <kbd>1</kbd> to push the bellows. Default is pull.</li>
+            <li>Hold down <kbd>q</kbd> to push the bellows. Default is pull.</li>
             <li>Row 1 starts with <kbd>z</kbd> and ends with <kbd>,</kbd> (comma)</li>
             <li>Row 2 starts with <kbd>a</kbd> and ends with <kbd>'</kbd> (apostrophe)</li>
             <li>Row 3 starts with <kbd>w</kbd> and ends with <kbd>[</kbd> (left bracket)</li>
@@ -317,7 +319,7 @@
     </div>
 
     <div class="bass-side">
-      <h2 class="desktop-only" style="margin: 6rem 0 1.5rem">Bass</h2>
+      <h2 class="desktop-only" style="margin: 6rem 0 1.5rem; justify-content: center;">Bass</h2>
       <div class="desktop-only accordion-layout">
         {#each bassRows as row}
           <div class="row {row}">

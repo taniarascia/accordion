@@ -38,14 +38,18 @@ export const keyMap = {
 }
 
 export const bassKeyMap = {
-  2: { row: 1, column: 1 },
-  3: { row: 1, column: 2 },
-  4: { row: 1, column: 3 },
-  5: { row: 1, column: 4 },
-  6: { row: 2, column: 1 },
-  7: { row: 2, column: 2 },
-  8: { row: 2, column: 3 },
-  9: { row: 2, column: 4 },
+  1: { row: 1, column: 1 },
+  2: { row: 1, column: 2 },
+  3: { row: 2, column: 1 },
+  4: { row: 2, column: 2 },
+  5: { row: 1, column: 3 },
+  6: { row: 1, column: 4 },
+  7: { row: 2, column: 3 },
+  8: { row: 2, column: 4 },
+  9: { row: 1, column: 5 },
+  0: { row: 1, column: 6 },
+  '-': { row: 2, column: 5 },
+  '=': { row: 2, column: 6 },
 }
 
 export const tone = {
@@ -63,7 +67,6 @@ export const tone = {
   B: [30.87, 61.74, 123.47, 246.94, 493.88, 987.77, 1975.53, 3951.07],
 }
 
-// Rows one, two and three with their notes and frequency for push and pull
 export const one = [
   // Pull
   { id: '1-1-pull', name: 'D♭', frequency: tone.Db[4] },
@@ -143,26 +146,36 @@ export const three = [
 
 export const bassLayout = {
   one: [
-    { id: '1-1-pull-bass', name: 'Gm', frequency: [tone.G[3], tone.Bb[4], tone.D[4]] },
-    { id: '1-2-pull-bass', name: 'g', frequency: tone.G[2] },
-    { id: '1-1-push-bass', name: 'D', frequency: [tone.D[3], tone.Gb[4], tone.A[4]] },
-    { id: '1-2-push-bass', name: 'd', frequency: tone.D[3] },
+    { id: '1-1-pull-bass', name: 'gm', frequency: [tone.G[3], tone.Bb[4], tone.D[4]] },
+    { id: '1-2-pull-bass', name: 'G', frequency: tone.G[2] },
+    { id: '1-1-push-bass', name: 'd', frequency: [tone.D[3], tone.Gb[4], tone.A[4]] },
+    { id: '1-2-push-bass', name: 'D', frequency: tone.D[3] },
 
-    { id: '1-3-pull-bass', name: 'Cm', frequency: [tone.C[3], tone.Eb[4], tone.G[4]] },
-    { id: '1-4-pull-bass', name: 'c', frequency: tone.C[3] },
-    { id: '1-3-push-bass', name: 'G', frequency: [tone.C[3], tone.Eb[4], tone.G[4]] },
-    { id: '1-4-push-bass', name: 'g', frequency: tone.G[2] },
+    { id: '1-3-pull-bass', name: 'cm', frequency: [tone.C[3], tone.Eb[4], tone.G[4]] },
+    { id: '1-4-pull-bass', name: 'C', frequency: tone.C[3] },
+    { id: '1-3-push-bass', name: 'g', frequency: [tone.C[3], tone.E[4], tone.G[4]] },
+    { id: '1-4-push-bass', name: 'G', frequency: tone.G[2] },
+
+    { id: '1-5-pull-bass', name: 'ab', frequency: [tone.Ab[3], tone.C[4], tone.Eb[4]] },
+    { id: '1-6-pull-bass', name: 'A♭', frequency: tone.Ab[3] },
+    { id: '1-5-push-bass', name: 'ab', frequency: [tone.Ab[3], tone.C[4], tone.Eb[4]] },
+    { id: '1-6-push-bass', name: 'A♭', frequency: tone.Ab[3] },
   ],
   two: [
-    { id: '2-1-pull-bass', name: 'C', frequency: [tone.C[3], tone.E[4], tone.G[4]] },
-    { id: '2-2-pull-bass', name: 'c', frequency: tone.C[3] },
-    { id: '2-1-push-bass', name: 'F', frequency: [tone.F[3], tone.A[4], tone.C[4]] },
-    { id: '2-2-push-bass', name: 'f', frequency: tone.F[3] },
+    { id: '2-1-pull-bass', name: 'c', frequency: [tone.C[3], tone.E[4], tone.G[4]] },
+    { id: '2-2-pull-bass', name: 'C', frequency: tone.C[3] },
+    { id: '2-1-push-bass', name: 'f', frequency: [tone.F[3], tone.A[4], tone.C[4]] },
+    { id: '2-2-push-bass', name: 'F', frequency: tone.F[3] },
 
-    { id: '2-3-pull-bass', name: 'F', frequency: [tone.F[3], tone.A[4], tone.C[4]] },
-    { id: '2-4-pull-bass', name: 'f', frequency: tone.F[3] },
-    { id: '2-3-push-bass', name: 'B♭', frequency: [tone.Bb[3], tone.D[4], tone.F[4]] },
-    { id: '2-4-push-bass', name: 'b♭', frequency: tone.Bb[3] },
+    { id: '2-3-pull-bass', name: 'f', frequency: [tone.F[3], tone.A[4], tone.C[4]] },
+    { id: '2-4-pull-bass', name: 'F', frequency: tone.F[3] },
+    { id: '2-3-push-bass', name: 'b♭', frequency: [tone.Bb[3], tone.D[4], tone.F[4]] },
+    { id: '2-4-push-bass', name: 'B♭', frequency: tone.Bb[3] },
+
+    { id: '2-5-pull-bass', name: 'b♭', frequency: [tone.Bb[3], tone.D[4], tone.F[4]] },
+    { id: '2-6-pull-bass', name: 'B♭', frequency: tone.Bb[3] },
+    { id: '2-5-push-bass', name: 'e♭', frequency: [tone.Eb[3], tone.G[4], tone.Bb[4]] },
+    { id: '2-6-push-bass', name: 'E♭', frequency: tone.Eb[3] },
   ],
 }
 
@@ -248,4 +261,4 @@ export const bassRowMap = { 1: 'one', 2: 'two' }
 export const rowTones = { FBE: { one: 'F', two: 'B♭', three: 'E♭' } }
 export const rows = Object.values(rowMap)
 export const bassRows = Object.values(bassRowMap)
-export const toggleBellows = '1'
+export const toggleBellows = 'q'
