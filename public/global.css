@@ -1,6 +1,7 @@
 :root {
   --red: #f37272;
   --green: #33ff66;
+  --yellow: rgba(225, 224, 84, 1);
 }
 
 *,
@@ -20,7 +21,7 @@ body {
 
 body {
   min-height: 100vh;
-  background: linear-gradient(to top right, #060014, #110033);
+  background: #010101;
   color: rgba(255, 255, 255, 0.9);
   margin: 0;
   padding: 0;
@@ -30,7 +31,7 @@ body {
 }
 
 a {
-  color: var(--green);
+  color: var(--yellow);
   text-decoration: none;
 }
 
@@ -72,21 +73,23 @@ input:disabled {
 
 button {
   border: none;
-  background: linear-gradient(to bottom, white, #e7e7e7);
-  box-shadow: 0px 6px rgba(255, 255, 255, 0.4);
-  color: #222;
+  background: linear-gradient(to bottom, black, #070707);
+  box-shadow: 0px 6px rgba(0, 0, 0, 0.2);
+  color: #fff;
   cursor: pointer;
   font-weight: 600;
 }
 
 button:hover {
   background: white;
+  color: black;
   box-shadow: 0px 6px rgba(255, 255, 255, 0.3);
 }
 
 button:active {
-  background: linear-gradient(to bottom, var(--green), #56ea7b);
-  box-shadow: 0px 6px rgba(255, 255, 255, 0.2);
+  background: white;
+  color: black;
+  box-shadow: 0px 6px rgba(255, 255, 255, 0.3);
 }
 
 button:disabled {
@@ -105,7 +108,7 @@ select {
 
 select:focus {
   outline: none;
-  border: 1px solid var(--green);
+  border: 1px solid var(--yellow);
 }
 
 small {
@@ -117,14 +120,14 @@ small {
 }
 
 kbd {
-  background-color: #eee;
+  background-color: rgba(0, 0, 0, 0.5);
   border-radius: 3px;
-  border: 1px solid #b4b4b4;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2), 0 2px 0 0 rgba(255, 255, 255, 0.7) inset;
-  color: #333;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 1px 1px rgba(255, 255, 255, 0.2), 0 2px 0 0 rgba(0, 0, 0, 0.7) inset;
+  color: #bbb;
   display: inline-block;
-  font-size: 0.9rem;
-  font-weight: 400;
+  font-size: 1rem;
+  font-weight: 600;
   line-height: 1;
   padding: 2px 5px;
   white-space: nowrap;
@@ -138,12 +141,13 @@ ul {
 }
 
 li {
+  line-height: 1.2;
   margin-bottom: 0.25rem;
 }
 
 main {
   margin: 0 auto;
-  max-width: 1200px;
+  max-width: 1300px;
 }
 
 h1,
@@ -159,6 +163,7 @@ h1 {
   font-size: 1.6rem;
   font-weight: 400;
   margin-bottom: 0.5rem;
+  color: var(--yellow);
 }
 
 h2 {
@@ -166,10 +171,15 @@ h2 {
   font-weight: 300;
 }
 
+.title {
+  margin-bottom: 3rem;
+}
+
 h3 {
   font-size: 0.9rem;
   font-weight: 500;
   text-transform: uppercase;
+  color: var(--yellow);
 }
 
 h4 {
@@ -207,16 +217,17 @@ footer {
   }
 }
 
-.keyboard-side {
-  align-self: center;
+.information-side {
+  width: 100%;
 }
 
 .information {
   padding: 1.5rem;
-  background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.2));
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: linear-gradient(to top, #111, #222);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
   margin-bottom: 1.5rem;
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .accordion-layout {
@@ -279,7 +290,7 @@ footer {
 
 @media screen and (min-width: 600px) {
   .currently-playing {
-    min-height: 200px;
+    min-height: 100px;
   }
 }
 
@@ -309,11 +320,11 @@ h2.direction {
   font-weight: 500;
 }
 
-h2.direction.pull {
+.direction.pull {
   color: var(--green);
 }
 
-h2.direction.push {
+.direction.push {
   color: var(--red);
 }
 
@@ -328,6 +339,7 @@ h2.direction.push {
   flex-direction: column;
   padding: 1rem;
   border-radius: 6px;
+  background: rgba(225, 224, 84, 1);
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
@@ -335,8 +347,9 @@ h2.direction.push {
   text-align: center;
   font-size: 1rem;
   text-transform: none;
-  font-weight: 300;
+  font-weight: 600;
   margin-bottom: 1rem;
+  color: #111;
 }
 
 .desktop-only {

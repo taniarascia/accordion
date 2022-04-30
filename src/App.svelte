@@ -187,6 +187,8 @@
   }
 
   async function playNotesInScale(idSet) {
+    handleClearAllNotes()
+
     for (const id of idSet) {
       // handleToggleBellows('pull')
       if (!activeButtonIdMap[id]) {
@@ -230,11 +232,9 @@
 
   <div class="layout">
     <div class="keyboard-side">
-      <h2 class="desktop-only direction {direction}">{direction}</h2>
       <div class="desktop-only accordion-layout">
         {#each rows as row}
           <div class="row {row}">
-            <h4>{rowTones[tuning][row]}<br />{row}</h4>
             {#each layout[row].filter(({ id }) => id.includes(direction)) as button}
               <div
                 class={`circle ${activeButtonIdMap[button.id] ? 'active' : ''} ${direction} `}
@@ -244,23 +244,28 @@
                 {button.name}
               </div>
             {/each}
+            <h4>{rowTones[tuning][row]}<br />{row}</h4>
           </div>
         {/each}
       </div>
     </div>
 
     <div class="information-side">
-      <h1>Keyboard Accordion</h1>
-      <h2>Play the diatonic button accordion with your computer keyboard!</h2>
-
       <div class="information">
+        <div class="title">
+          <h1>Keyboard Accordion</h1>
+          <h2>Play the diatonic button accordion with your computer keyboard!</h2>
+        </div>
         <div>
           <h3>How to use</h3>
           <ul>
-            <li>Hold down <kbd>q</kbd> to push the bellows. Default is pull.</li>
-            <li>Row 1 starts with <kbd>z</kbd> and ends with <kbd>,</kbd> (comma)</li>
-            <li>Row 2 starts with <kbd>a</kbd> and ends with <kbd>'</kbd> (apostrophe)</li>
-            <li>Row 3 starts with <kbd>w</kbd> and ends with <kbd>[</kbd> (left bracket)</li>
+            <li>Each key on the keyboard corresponds to a button on the accordion.</li>
+            <li>
+              Hold down <kbd>q</kbd> to <strong>push</strong> the bellows. Default is
+              <strong>pull</strong>.
+            </li>
+            <li>The treble side buttons begin with <kbd>z</kbd>, <kbd>a</kbd>, and <kbd>w</kbd></li>
+            <li>The twelve bass buttons use the number row from <kbd>1</kbd> to <kbd>=</kbd></li>
           </ul>
         </div>
 
@@ -303,23 +308,19 @@
         </div>
       </div>
 
-      <div class="information desktop-only">
-        <div>
-          <h3>Notes being played</h3>
-          <div class="currently-playing">
-            {#each Object.entries(activeButtonIdMap) as [id, value]}
-              <div class="flex col">
-                <div class="circle note">{value.name}</div>
-                <div><small>Row: {id.split('-')[0]}<br /> Col: {id.split('-')[1]}</small></div>
-              </div>
-            {/each}
-          </div>
+      <div class="desktop-only">
+        <div class="currently-playing">
+          {#each Object.entries(activeButtonIdMap) as [id, value]}
+            <div class="flex col">
+              <div class="circle note">{value.name}</div>
+              <div><small>Row: {id.split('-')[0]}<br /> Col: {id.split('-')[1]}</small></div>
+            </div>
+          {/each}
         </div>
       </div>
     </div>
 
     <div class="bass-side">
-      <h2 class="desktop-only" style="margin: 6rem 0 1.5rem; justify-content: center;">Bass</h2>
       <div class="desktop-only accordion-layout">
         {#each bassRows as row}
           <div class="row {row}">
@@ -335,13 +336,12 @@
           </div>
         {/each}
       </div>
+      <footer>
+        <p>
+          Made with 💾 by <a href="https://tania.dev" target="_blank">Tania</a>.
+        </p>
+        <p><a href="https://github.com/taniarascia/accordion" target="_blank">Open source</a></p>
+      </footer>
     </div>
   </div>
-
-  <footer>
-    <p>
-      Made with 💾 by <a href="https://tania.dev" target="_blank">Tania</a>.<br />
-      <a href="https://github.com/taniarascia/accordion" target="_blank">Open source</a>.
-    </p>
-  </footer>
 </main>
