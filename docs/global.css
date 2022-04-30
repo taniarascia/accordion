@@ -11,7 +11,7 @@
 }
 
 html {
-  background: #110033;
+  background: #010101;
 }
 
 html,
@@ -213,6 +213,7 @@ footer {
   .layout {
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
     gap: 2.5rem;
   }
 }
