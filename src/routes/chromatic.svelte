@@ -1,6 +1,6 @@
 <script>
   import { keyMapChromatic } from '../data.js'
-  import { layout, buttonIdMap, rows } from '../chromatic-data.js'
+  import { layout, layoutB, buttonIdMap, buttonIdMapB, rows } from '../chromatic-data.js'
 
   // Audio
   const audio = new (window.AudioContext || window.webkitAudioContext)()
@@ -9,11 +9,14 @@
   gainNode.connect(audio.destination)
 
   // State
+  let system = 'C'
   let activeButtonIdMap = {}
+
+  let map = buttonIdMap
 
   // Handlers
   function playTone(id) {
-    const { frequency } = buttonIdMap[id]
+    const { frequency } = map[id]
     let oscillator
 
     if (Array.isArray(frequency)) {
@@ -51,7 +54,7 @@
     if (!activeButtonIdMap[id]) {
       const { oscillator } = playTone(id)
 
-      activeButtonIdMap[id] = { oscillator, ...buttonIdMap[id] }
+      activeButtonIdMap[id] = { oscillator, ...map[id] }
     }
   }
 
@@ -89,6 +92,15 @@
     updateActiveButtonMap(id)
   }
 
+  const handleChangeSystem = (event) => {
+    system = event.target.value
+    if (event.target.value === 'C') {
+      map = buttonIdMap
+    } else {
+      map = buttonIdMapB
+    }
+  }
+
   const handleClearAllNotes = () => {
     for (const [keyId, keyValues] of Object.entries(activeButtonIdMap)) {
       // Remove existing value
@@ -117,7 +129,7 @@
       <div class="desktop-only accordion-layout">
         {#each rows as row}
           <div class="row {row}">
-            {#each layout[row] as button}
+            {#each system === 'C' ? layout[row] : layoutB[row] as button}
               <div
                 class={`circle ${activeButtonIdMap[button.id] ? 'active' : ''} ${
                   button.name.includes('♭') ? 'accidental' : ''
@@ -155,10 +167,10 @@
 
         <div class="flex">
           <div>
-            <h3>Tuning</h3>
-            <select>
-              <option value="C" selected>C-Griff</option>
-              <option value="B" disabled>B-Griff (Not yet)</option>
+            <h3>System</h3>
+            <select value={system} on:change={handleChangeSystem}>
+              <option value="C">C-Griff</option>
+              <option value="B">B-Griff</option>
             </select>
           </div>
         </div>
