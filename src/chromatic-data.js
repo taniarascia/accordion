@@ -83,14 +83,14 @@ export const threeB = [
 export const fourB = [
   { id: '4-1', name: 'A♭', frequency: tone.Ab[3] },
   { id: '4-2', name: 'B', frequency: tone.B[3] },
-  { id: '4-3', name: 'D', frequency: tone.D[3] },
-  { id: '4-4', name: 'F', frequency: tone.F[3] },
-  { id: '4-5', name: 'A♭', frequency: tone.Ab[3] },
-  { id: '4-6', name: 'B', frequency: tone.B[3] },
-  { id: '4-7', name: 'D', frequency: tone.D[4] },
-  { id: '4-8', name: 'F', frequency: tone.F[4] },
-  { id: '4-9', name: 'A♭', frequency: tone.Ab[4] },
-  { id: '4-10', name: 'B', frequency: tone.B[4] },
+  { id: '4-3', name: 'D', frequency: tone.D[4] },
+  { id: '4-4', name: 'F', frequency: tone.F[4] },
+  { id: '4-5', name: 'A♭', frequency: tone.Ab[4] },
+  { id: '4-6', name: 'B', frequency: tone.B[4] },
+  { id: '4-7', name: 'D', frequency: tone.D[5] },
+  { id: '4-8', name: 'F', frequency: tone.F[5] },
+  { id: '4-9', name: 'A♭', frequency: tone.Ab[5] },
+  { id: '4-10', name: 'B', frequency: tone.B[5] },
 ]
 
 export const layout = { one, two, three, four }
