@@ -10,7 +10,7 @@ export const one = [
   { id: '1-7', name: 'C', frequency: tone.C[5] },
   { id: '1-8', name: 'E♭', frequency: tone.Eb[5] },
   { id: '1-9', name: 'G♭', frequency: tone.Gb[5] },
-  { id: '1-10', name: 'A', frequency: tone.A[6] },
+  { id: '1-10', name: 'A', frequency: tone.A[5] },
 ]
 
 export const two = [
@@ -24,7 +24,7 @@ export const two = [
   { id: '2-8', name: 'D♭', frequency: tone.Db[5] },
   { id: '2-9', name: 'E', frequency: tone.E[5] },
   { id: '2-10', name: 'G', frequency: tone.G[5] },
-  { id: '2-11', name: 'B♭', frequency: tone.Bb[6] },
+  { id: '2-11', name: 'B♭', frequency: tone.Bb[5] },
 ]
 
 export const three = [
