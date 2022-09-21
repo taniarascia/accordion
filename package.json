@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build": "rollup -c",
-    "dev": "rollup -c -w -s",
+    "dev": "rollup -c -w",
     "start": "sirv public --dev -s"
   },
   "devDependencies": {
