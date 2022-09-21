@@ -1,10 +1,8 @@
 <script>
-  import { Link } from 'svelte-routing'
-
+  import { sleep } from '../helpers.js'
+  import { keyMap } from '../data.js'
   import {
-    keyMap,
     bassKeyMap,
-    sleep,
     layout,
     bassLayout,
     buttonIdMap,
@@ -13,7 +11,7 @@
     rowTones,
     toggleBellows,
     scales,
-  } from '../data.js'
+  } from '../diatonic-data.js'
 
   // Audio
   const audio = new (window.AudioContext || window.webkitAudioContext)()
@@ -255,7 +253,6 @@
     <div class="information-side">
       <div class="information">
         <header class="header">
-          <Link to="/">&lsaquo; Back</Link>
           <h1 class="title">Diatonic Accordion</h1>
           <div class="subtitle">Play the diatonic button accordion with your computer keyboard</div>
         </header>
@@ -276,9 +273,9 @@
           <div>
             <h3>Tuning</h3>
             <select on:click={handleChangeTuning}>
-              <option value="FBE" selected><h2>FB♭E♭ (Fa)</h2></option>
-              <option value="GCF" disabled><h2>GCF (Sol) Not yet</h2></option>
-              <option value="EAD" disabled><h2>EAD (Mi) Not yet</h2></option>
+              <option value="FBE" selected>FB♭E♭ (Fa)</option>
+              <option value="GCF" disabled>GCF (Sol) Not yet</option>
+              <option value="EAD" disabled>EAD (Mi) Not yet</option>
             </select>
           </div>
         </div>
@@ -309,9 +306,7 @@
             </div>
           </div>
         </div>
-      </div>
 
-      <div class="desktop-only">
         <div class="currently-playing">
           {#each Object.entries(activeButtonIdMap) as [id, value]}
             <div class="flex col">

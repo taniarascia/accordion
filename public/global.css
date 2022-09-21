@@ -40,6 +40,14 @@ a:hover {
   text-decoration: underline;
 }
 
+a.outer-link {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+a.outer-link:hover {
+  color: white;
+}
+
 p {
   margin-top: 0;
   margin-bottom: 1.5rem;
@@ -107,7 +115,6 @@ small {
   font-weight: 400;
   text-transform: uppercase;
   line-height: 1.2;
-  color: white;
 }
 
 kbd {
@@ -177,7 +184,6 @@ h4 {
 .layout {
   display: flex;
   flex-direction: column;
-  padding: 2rem 1rem 1rem;
 }
 
 footer {
@@ -198,7 +204,7 @@ footer {
 }
 
 .information {
-  padding: 3rem;
+  padding: 1.5rem;
   background: white;
   border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 1px 3px 6px rgba(0, 0, 0, 0.1);
@@ -215,6 +221,9 @@ footer {
 .row.one,
 .row.three {
   margin-top: 35px;
+}
+.row.four {
+  margin-top: 70px;
 }
 
 .bass-side .row.one {
@@ -237,6 +246,12 @@ footer {
   cursor: pointer;
 }
 
+.circle.accidental {
+  background: linear-gradient(to bottom, #444, black);
+  box-shadow: 0px 6px rgb(0, 0, 0, 0.4);
+  color: #eee;
+}
+
 .circle:hover {
   background: white;
   box-shadow: 0px 6px rgba(255, 255, 255, 0.3);
@@ -244,7 +259,9 @@ footer {
 }
 
 .circle.pull:active,
-.circle.pull.active {
+.circle.pull.active,
+.circle.active,
+.circle:active {
   background: linear-gradient(to bottom, var(--green), #56ea7b);
   box-shadow: 0px 6px rgba(255, 255, 255, 0.2);
 }
@@ -328,34 +345,14 @@ h2.direction {
   color: white;
 }
 
-.desktop-only {
-  display: none !important;
-}
-
-.mobile-only {
-  display: block !important;
-}
-
-@media screen and (min-width: 600px) {
-  .desktop-only {
-    display: flex !important;
-  }
-
-  .mobile-only {
-    display: none !important;
-  }
-}
-
 .window {
   min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   background: #3b5bdb;
 }
 
 .home {
-  margin: 0 auto;
+  margin-left: auto;
+  margin-right: auto;
   max-width: 1300px;
 }
 
@@ -407,4 +404,32 @@ a.selection h2 {
   margin-top: 0;
   color: #495057;
   font-weight: 700;
+}
+
+.desktop-only {
+  display: none !important;
+}
+
+.mobile-only {
+  display: block !important;
+}
+
+@media screen and (min-width: 600px) {
+  .desktop-only {
+    display: flex !important;
+  }
+
+  .mobile-only {
+    display: none !important;
+  }
+
+  .window {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .information {
+    padding: 3rem;
+  }
 }

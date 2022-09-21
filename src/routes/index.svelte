@@ -10,8 +10,8 @@
 
 <Router {url}>
   <div>
-    <Route path="chromatic" component={Chromatic} />
-    <Route path="diatonic" component={Diatonic} />
-    <Route path="/" component={Home} />
+    <Route path="chromatic"><Chromatic /></Route>
+    <Route path="diatonic"><Diatonic /></Route>
+    <Route path="/"><Home /></Route>
   </div>
 </Router>

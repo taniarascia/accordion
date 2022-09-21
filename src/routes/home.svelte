@@ -4,7 +4,7 @@
 
 <div class="home information">
   <header>
-    <h1 class="title">KeyboardAccordion.com</h1>
+    <h1 class="title">Keyboard Accordion</h1>
     <div class="subtitle">Play the accordion with your computer keyboard!</div>
   </header>
 
