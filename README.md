@@ -6,10 +6,7 @@ Play the diatonic button accordion with your computer keyboard!
 
 ## Todo
 
-- Add bass notes
 - Add CGF and EAD tunings
-- Add scales
-- Add bottom 3 notes
 
 ## Get started
 
