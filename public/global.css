@@ -256,6 +256,7 @@ footer {
   background: white;
   box-shadow: 0px 6px rgba(255, 255, 255, 0.3);
   cursor: pointer;
+  color: #111;
 }
 
 .circle.pull:active,
