@@ -1,6 +1,7 @@
 <script>
   import { keyMapChromatic } from '../data.js'
   import { layout, layoutB, buttonIdMap, buttonIdMapB, rows } from '../chromatic-data.js'
+  import { createOscillator } from "../synth.js"
 
   // Audio
   const audio = new (window.AudioContext || window.webkitAudioContext)()
@@ -21,20 +22,18 @@
 
     if (Array.isArray(frequency)) {
       oscillator = frequency.map((hz) => {
-        const oscillator = audio.createOscillator()
-        oscillator.type = 'sawtooth'
-        oscillator.connect(gainNode)
-        oscillator.frequency.value = hz
-        oscillator.start()
+        const oscillator = createOscillator({context: audio,
+          frequency: hz,
+          destination: gainNode
+        })
 
         return oscillator
       })
     } else {
-      oscillator = audio.createOscillator()
-      oscillator.type = 'sawtooth'
-      oscillator.connect(gainNode)
-      oscillator.frequency.value = frequency
-      oscillator.start()
+      oscillator = createOscillator({context: audio,
+        frequency,
+        destination: gainNode
+      })
     }
 
     return { oscillator }
