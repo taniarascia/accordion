@@ -15,6 +15,8 @@
   let layout = layouts[system].layout
   let map = layouts[system].buttonIdMap
 
+  let oscillatorType = 'sawtooth'
+
   // Handlers
   function playTone(id) {
     const { frequency } = map[id]
@@ -23,7 +25,7 @@
     if (Array.isArray(frequency)) {
       oscillator = frequency.map((hz) => {
         const oscillator = audio.createOscillator()
-        oscillator.type = 'sawtooth'
+        oscillator.type = oscillatorType
         oscillator.connect(gainNode)
         oscillator.frequency.value = hz
         oscillator.start()
@@ -32,7 +34,7 @@
       })
     } else {
       oscillator = audio.createOscillator()
-      oscillator.type = 'sawtooth'
+      oscillator.type = oscillatorType
       oscillator.connect(gainNode)
       oscillator.frequency.value = frequency
       oscillator.start()
@@ -97,6 +99,10 @@
     system = event.target.value
     layout = layouts[system].layout
     map = layouts[system].buttonIdMap
+  }
+
+  const handleChangeSound = (event) => {
+    oscillatorType = event.target.value
   }
 
   const handleClearAllNotes = () => {
@@ -170,6 +176,15 @@
               {#each Object.keys(layouts) as item}
                 <option value="{item}">{layouts[item].name}</option>
               {/each}
+            </select>
+          </div>
+          <div>
+            <h3>Sound</h3>
+            <select value={oscillatorType} on:change={handleChangeSound}>
+              <option value="square">Square</option>
+              <option value="sawtooth">Sawtooth</option>
+              <option value="triangle">Triangle</option>
+              <option value="sine">Sine</option>
             </select>
           </div>
         </div>
