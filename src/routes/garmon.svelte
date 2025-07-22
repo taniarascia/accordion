@@ -181,23 +181,21 @@
         </div>
 
         <div class="flex">
-          <div class="scales">
-            <div>
-              <h3>System</h3>
-              <select value={system} on:change={handleChangeSystem}>
-                {#each Object.keys(layouts) as item}
-                  <option value="{item}">{layouts[item].name}</option>
-                {/each}
-              </select>
-            </div>
-            <div>
-              <h3>Key</h3>
-              <div class="scale">
-                <h4>{key >= 0 ? '+' : ''}{key} ({Object.keys(tone)[((key%12) + 12) % 12]})</h4> <!-- regular modulo doesn't work with negative?? -->
-                <div>
-                  <button on:click={transposeDown}>-</button>
-                  <button on:click={transposeUp}>+</button>
-                </div>
+          <div>
+            <h3>System</h3>
+            <select value={system} on:change={handleChangeSystem}>
+              {#each Object.keys(layouts) as item}
+                <option value="{item}">{layouts[item].name}</option>
+              {/each}
+            </select>
+          </div>
+          <div>
+            <h3>Key</h3>
+            <div class="scale">
+              <h4>{key >= 0 ? '+' : ''}{key} ({Object.keys(tone)[((key%12) + 12) % 12]})</h4> <!-- regular modulo doesn't work with negative?? -->
+              <div>
+                <button on:click={transposeDown}>-</button>
+                <button on:click={transposeUp}>+</button>
               </div>
             </div>
           </div>
