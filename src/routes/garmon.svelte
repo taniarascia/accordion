@@ -1,6 +1,8 @@
+
+
 <script>
-  import { keyMapChromatic } from '../data.js'
-  import { layouts, rows } from '../chromatic-data.js'
+  import { tone } from '../data.js'
+  import { layouts, rows, bassRows, keyMapGarmon } from '../garmon-data.js'
 
   // Audio
   const audio = new (window.AudioContext || window.webkitAudioContext)()
@@ -9,36 +11,34 @@
   gainNode.connect(audio.destination)
 
   // State
-  let system = 'B'
+  let system = 'Garmon'
   let activeButtonIdMap = {}
 
   let layout = layouts[system].layout
   let map = layouts[system].buttonIdMap
 
+  let key = 0
+
   let oscillatorType = 'sawtooth'
 
   // Handlers
   function playTone(id) {
-    const { frequency } = map[id]
+    let { frequency } = map[id]
     let oscillator
 
-    if (Array.isArray(frequency)) {
-      oscillator = frequency.map((hz) => {
-        const oscillator = audio.createOscillator()
-        oscillator.type = oscillatorType
-        oscillator.connect(gainNode)
-        oscillator.frequency.value = hz
-        oscillator.start()
+    if (!Array.isArray(frequency)) {
+      frequency = [frequency, frequency*2]
+    }
 
-        return oscillator
-      })
-    } else {
-      oscillator = audio.createOscillator()
+    oscillator = frequency.map((hz) => {
+      const oscillator = audio.createOscillator()
       oscillator.type = oscillatorType
       oscillator.connect(gainNode)
-      oscillator.frequency.value = frequency
+      oscillator.frequency.value = hz * (2**(key/12))
       oscillator.start()
-    }
+
+      return oscillator
+    })
 
     return { oscillator }
   }
@@ -66,7 +66,7 @@
       event.preventDefault();
     }
     const key = `${e.key}`.toLowerCase() || e.key
-    const buttonMapData = keyMapChromatic[key]
+    const buttonMapData = keyMapGarmon[key]
 
     if (buttonMapData) {
       const { row, column } = buttonMapData
@@ -78,7 +78,7 @@
 
   function handleKeyUpNote(e) {
     const key = `${e.key}`.toLowerCase() || e.key
-    const buttonMapData = keyMapChromatic[key]
+    const buttonMapData = keyMapGarmon[key]
 
     if (buttonMapData) {
       const { row, column } = buttonMapData
@@ -119,6 +119,13 @@
     }
     activeButtonIdMap = {}
   }
+
+  const transposeUp = () => {
+    key += 1
+  }
+  const transposeDown = () => {
+    key -= 1
+  }
 </script>
 
 <svelte:body
@@ -133,7 +140,7 @@
 
   <div class="layout">
     <div class="keyboard-side">
-      <div class="desktop-only accordion-layout {system}-system">
+      <div class="desktop-only accordion-layout garmon-layout {system}-garmon">
         {#each rows as row}
           <div class="row {row}">
             {#each layout[row] as button}
@@ -147,7 +154,6 @@
                 {button.name}
               </div>
             {/each}
-            <h4>{row}</h4>
           </div>
         {/each}
       </div>
@@ -156,9 +162,9 @@
     <div class="information-side">
       <div class="information">
         <header class="header">
-          <h1 class="title">Chromatic Accordion</h1>
+          <h1 class="title">Garmon</h1>
           <div class="subtitle">
-            Play the chromatic button accordion with your computer keyboard
+            Play the garmon with your computer keyboard
           </div>
         </header>
 
@@ -167,8 +173,10 @@
           <ul>
             <li>Each key on the keyboard corresponds to a button on the accordion.</li>
             <li>
-              The buttons begin with <kbd>z</kbd>, <kbd>a</kbd>, <kbd>w</kbd> and <kbd>3</kbd>
+              The treble side buttons begin with <kbd>z</kbd>, and <kbd>s</kbd>
             </li>
+            <li>The 16 bass buttons begin with <kbd>3</kbd>, and <kbd>e</kbd></li>
+            <li>Use the key buttons to change the key (the note names will not change)</li>
           </ul>
         </div>
 
@@ -180,6 +188,16 @@
                 <option value="{item}">{layouts[item].name}</option>
               {/each}
             </select>
+          </div>
+          <div>
+            <h3>Key</h3>
+            <div class="scale">
+              <h4>{key >= 0 ? '+' : ''}{key} ({Object.keys(tone)[((key%12) + 12) % 12]})</h4> <!-- regular modulo doesn't work with negative?? -->
+              <div>
+                <button on:click={transposeDown}>-</button>
+                <button on:click={transposeUp}>+</button>
+              </div>
+            </div>
           </div>
           <div>
             <h3>Sound</h3>
@@ -202,6 +220,24 @@
             {/each}
           </div>
         </div>
+      </div>
+    </div>
+
+    <div class="bass-side">
+      <div class="desktop-only accordion-layout">
+        {#each bassRows as row}
+          <div class="row {row}">
+            {#each layout[row] as button}
+              <div
+                class={`circle ${activeButtonIdMap[button.id] ? 'active' : ''}`}
+                id={button.id}
+                on:mousedown={handleClickNote(button.id)}
+              >
+                {button.name}
+              </div>
+            {/each}
+          </div>
+        {/each}
       </div>
     </div>
   </div>

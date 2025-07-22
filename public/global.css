@@ -231,6 +231,10 @@ footer {
   margin-right: 0.5rem;
 }
 
+.garmon-layout .row.two {
+  margin-top: 70px;
+}
+
 .circle {
   display: flex;
   align-items: center;
@@ -244,6 +248,18 @@ footer {
   color: #222;
   font-weight: 600;
   cursor: pointer;
+}
+
+.G-system .circle {
+  border-radius: 32% 8% 8% 32%;
+  margin-left: 3px;
+  width: 57px;
+}
+
+.Janko-system .circle {
+  border-radius: 10%;
+  margin-left: 5px;
+  width: 80px;
 }
 
 .circle.accidental {
