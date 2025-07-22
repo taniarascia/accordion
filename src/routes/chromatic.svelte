@@ -62,6 +62,9 @@
   }
 
   function handleKeyPressNote(e) {
+    if (e.key === '/' || e.key === "'") {
+      event.preventDefault();
+    }
     const key = `${e.key}`.toLowerCase() || e.key
     const buttonMapData = keyMapChromatic[key]
 
