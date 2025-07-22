@@ -246,6 +246,18 @@ footer {
   cursor: pointer;
 }
 
+.G-system .circle {
+  border-radius: 32% 8% 8% 32%;
+  margin-left: 3px;
+  width: 57px;
+}
+
+.Janko-system .circle {
+  border-radius: 10%;
+  margin-left: 5px;
+  width: 80px;
+}
+
 .circle.accidental {
   background: linear-gradient(to bottom, #444, black);
   box-shadow: 0px 6px rgb(0, 0, 0, 0.4);

@@ -1,6 +1,6 @@
 <script>
   import { keyMapChromatic } from '../data.js'
-  import { layout, layoutB, buttonIdMap, buttonIdMapB, rows } from '../chromatic-data.js'
+  import { layouts, rows } from '../chromatic-data.js'
 
   // Audio
   const audio = new (window.AudioContext || window.webkitAudioContext)()
@@ -9,10 +9,11 @@
   gainNode.connect(audio.destination)
 
   // State
-  let system = 'C'
+  let system = 'B'
   let activeButtonIdMap = {}
 
-  let map = buttonIdMap
+  let layout = layouts[system].layout
+  let map = layouts[system].buttonIdMap
 
   // Handlers
   function playTone(id) {
@@ -77,7 +78,7 @@
     if (buttonMapData) {
       const { row, column } = buttonMapData
       const id = `${row}-${column}`
-
+      
       if (activeButtonIdMap[id]) {
         stopTone(id)
         // Must be reassigned in Svelte
@@ -94,11 +95,8 @@
 
   const handleChangeSystem = (event) => {
     system = event.target.value
-    if (event.target.value === 'C') {
-      map = buttonIdMap
-    } else {
-      map = buttonIdMapB
-    }
+    layout = layouts[system].layout
+    map = layouts[system].buttonIdMap
   }
 
   const handleClearAllNotes = () => {
@@ -126,10 +124,10 @@
 
   <div class="layout">
     <div class="keyboard-side">
-      <div class="desktop-only accordion-layout">
+      <div class="desktop-only accordion-layout {system}-system">
         {#each rows as row}
           <div class="row {row}">
-            {#each system === 'C' ? layout[row] : layoutB[row] as button}
+            {#each layout[row] as button}
               <div
                 class={`circle ${activeButtonIdMap[button.id] ? 'active' : ''} ${
                   button.name.includes('♭') ? 'accidental' : ''
@@ -169,8 +167,9 @@
           <div>
             <h3>System</h3>
             <select value={system} on:change={handleChangeSystem}>
-              <option value="C">C-Griff</option>
-              <option value="B">B-Griff</option>
+              {#each Object.keys(layouts) as item}
+                <option value="{item}">{layouts[item].name}</option>
+              {/each}
             </select>
           </div>
         </div>
