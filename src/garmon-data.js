@@ -92,7 +92,7 @@ export const buttonIdMap = [...one, ...two, ...three, ...four].reduce((acc, valu
 }, {})
 
 export const layouts = {
-  'Garmon': {name: "Garmon", layout: layout, buttonIdMap: buttonIdMap},
+  Garmon: { name: 'Garmon', layout: layout, buttonIdMap: buttonIdMap },
 }
 
 export const rowMap = { 1: 'one', 2: 'two', 3: 'four', 4: 'three' }

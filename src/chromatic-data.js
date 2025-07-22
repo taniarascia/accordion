@@ -218,15 +218,18 @@ export const buttonIdMapB = [...oneB, ...two, ...threeB, ...fourB].reduce((acc, 
 export const buttonIdMapG = [...oneG, ...twoG, ...threeG, ...fourG].reduce((acc, value) => {
   return { ...acc, [value.id]: value }
 }, {})
-export const buttonIdMapJanko = [...oneJanko, ...twoJanko, ...threeJanko, ...fourJanko].reduce((acc, value) => {
-  return { ...acc, [value.id]: value }
-}, {})
+export const buttonIdMapJanko = [...oneJanko, ...twoJanko, ...threeJanko, ...fourJanko].reduce(
+  (acc, value) => {
+    return { ...acc, [value.id]: value }
+  },
+  {}
+)
 
 export const layouts = {
-  'B': {name: "B-Griff", layout: layoutB, buttonIdMap: buttonIdMapB},
-  'C': {name: "C-Griff", layout: layoutC, buttonIdMap: buttonIdMapC},
-  'G': {name: "G-Griff", layout: layoutG, buttonIdMap: buttonIdMapG},
-  'Janko': {name: "Janko", layout: layoutJanko, buttonIdMap: buttonIdMapJanko},
+  B: { name: 'B-Griff', layout: layoutB, buttonIdMap: buttonIdMapB },
+  C: { name: 'C-Griff', layout: layoutC, buttonIdMap: buttonIdMapC },
+  G: { name: 'G-Griff', layout: layoutG, buttonIdMap: buttonIdMapG },
+  Janko: { name: 'Janko', layout: layoutJanko, buttonIdMap: buttonIdMapJanko },
 }
 
 export const rowMap = { 1: 'one', 2: 'two', 3: 'three', 4: 'four' }
