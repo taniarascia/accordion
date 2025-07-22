@@ -231,6 +231,10 @@ footer {
   margin-right: 0.5rem;
 }
 
+.garmon-layout .row.two {
+  margin-top: 70px;
+}
+
 .circle {
   display: flex;
   align-items: center;

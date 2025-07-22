@@ -18,6 +18,10 @@
         <img src="assets/chromatic.jpeg" alt="Chromatic" />
         <h2>Chromatic</h2>
       </Link>
+      <Link to="garmon" class="selection">
+        <img src="assets/garmon.png" alt="Garmon" />
+        <h2>Garmon</h2>
+      </Link>
     </div>
   </main>
 
