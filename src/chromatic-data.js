@@ -163,7 +163,6 @@ export const oneB_fb = [
   { id: '1-8', name: 'B', frequency: tone.B[3] },
   { id: '1-9', name: 'A♭', frequency: tone.Ab[3] },
   { id: '1-10', name: 'F', frequency: tone.F[3] },
-  { id: '1-1', name: 'A♭', frequency: tone.Ab[5] },
 ]
 
 export const twoB_fb = [
@@ -317,54 +316,56 @@ export const fourJanko = [
 
 // Quint free bass
 export const one_quint = [
-  { id: '1-1', name: 'E♭', frequency: tone.Eb[4] },
-  { id: '1-2', name: 'B♭', frequency: tone.Bb[3] },
-  { id: '1-3', name: 'F', frequency: tone.F[3] },
-  { id: '1-4', name: 'C', frequency: tone.C[4] },
-  { id: '1-5', name: 'G', frequency: tone.G[3] },
-  { id: '1-6', name: 'D', frequency: tone.D[4] },
-  { id: '1-7', name: 'A', frequency: tone.A[3] },
-  { id: '1-8', name: 'E', frequency: tone.E[3] },
-  { id: '1-9', name: 'B', frequency: tone.B[3] },
-  { id: '1-10', name: 'F♯', frequency: tone.Gb[3] },
+  { id: '1-1', name: 'A♭', frequency: tone.Ab[3] },
+  { id: '1-2', name: 'E♭', frequency: tone.Eb[4] },
+  { id: '1-3', name: 'B♭', frequency: tone.Bb[3] },
+  { id: '1-4', name: 'F', frequency: tone.F[3] },
+  { id: '1-5', name: 'C', frequency: tone.C[4] },
+  { id: '1-6', name: 'G', frequency: tone.G[3] },
+  { id: '1-7', name: 'D', frequency: tone.D[4] },
+  { id: '1-8', name: 'A', frequency: tone.A[3] },
+  { id: '1-9', name: 'E', frequency: tone.E[3] },
+  { id: '1-10', name: 'B', frequency: tone.B[3] },
 ]
 
 export const two_quint = [
-  { id: '2-1', name: 'G', frequency: tone.G[3] },
-  { id: '2-2', name: 'D', frequency: tone.D[4] },
-  { id: '2-3', name: 'A', frequency: tone.A[3] },
-  { id: '2-4', name: 'E', frequency: tone.E[3] },
-  { id: '2-5', name: 'B', frequency: tone.B[3] },
-  { id: '2-6', name: 'F♯', frequency: tone.Gb[3] },
-  { id: '2-7', name: 'C♯', frequency: tone.Db[4] },
-  { id: '2-8', name: 'G♯', frequency: tone.Ab[3] },
-  { id: '2-9', name: 'D♯', frequency: tone.Eb[4] },
-  { id: '2-10', name: 'A♯', frequency: tone.Bb[3] },
+  { id: '2-1', name: 'C', frequency: tone.C[4] },
+  { id: '2-2', name: 'G', frequency: tone.G[3] },
+  { id: '2-3', name: 'D', frequency: tone.D[4] },
+  { id: '2-4', name: 'A', frequency: tone.A[3] },
+  { id: '2-5', name: 'E', frequency: tone.E[3] },
+  { id: '2-6', name: 'B', frequency: tone.B[3] },
+  { id: '2-7', name: 'F♯', frequency: tone.Gb[3] },
+  { id: '2-8', name: 'C♯', frequency: tone.Db[4] },
+  { id: '2-9', name: 'G♯', frequency: tone.Ab[3] },
+  { id: '2-10', name: 'D♯', frequency: tone.Eb[4] },
+  { id: '2-11', name: 'A♯', frequency: tone.Bb[3] },
 ]
 
 export const three_quint = [
-  { id: '3-1', name: 'B♭', frequency: tone.Bb[2] },
-  { id: '3-2', name: 'F', frequency: tone.F[2] },
-  { id: '3-3', name: 'C', frequency: tone.C[3] },
-  { id: '3-4', name: 'G', frequency: tone.G[2] },
-  { id: '3-5', name: 'D', frequency: tone.D[3] },
-  { id: '3-6', name: 'A', frequency: tone.A[2] },
-  { id: '3-7', name: 'E', frequency: tone.E[2] },
-  { id: '3-8', name: 'B', frequency: tone.B[2] },
-  { id: '3-9', name: 'F♯', frequency: tone.Gb[2] },
-  { id: '3-10', name: 'C♯', frequency: tone.Db[3] },
+  { id: '3-1', name: 'E♭', frequency: tone.Eb[3] },
+  { id: '3-2', name: 'B♭', frequency: tone.Bb[2] },
+  { id: '3-3', name: 'F', frequency: tone.F[2] },
+  { id: '3-4', name: 'C', frequency: tone.C[3] },
+  { id: '3-5', name: 'G', frequency: tone.G[2] },
+  { id: '3-6', name: 'D', frequency: tone.D[3] },
+  { id: '3-7', name: 'A', frequency: tone.A[2] },
+  { id: '3-8', name: 'E', frequency: tone.E[2] },
+  { id: '3-9', name: 'B', frequency: tone.B[2] },
+  { id: '3-10', name: 'F♯', frequency: tone.Gb[2] },
 ]
 
 export const four_quint = [
-  { id: '4-1', name: 'A', frequency: tone.A[2] },
-  { id: '4-2', name: 'E', frequency: tone.E[2] },
-  { id: '4-3', name: 'B', frequency: tone.B[2] },
-  { id: '4-4', name: 'F♯', frequency: tone.Gb[2] },
-  { id: '4-5', name: 'C♯', frequency: tone.Db[3] },
-  { id: '4-6', name: 'G♯', frequency: tone.Ab[2] },
-  { id: '4-7', name: 'D♯', frequency: tone.Eb[3] },
-  { id: '4-8', name: 'A♯', frequency: tone.Bb[2] },
-  { id: '4-9', name: 'E♯', frequency: tone.F[2] },
+  { id: '4-1', name: 'D', frequency: tone.D[3] },
+  { id: '4-2', name: 'A', frequency: tone.A[2] },
+  { id: '4-3', name: 'E', frequency: tone.E[2] },
+  { id: '4-4', name: 'B', frequency: tone.B[2] },
+  { id: '4-5', name: 'F♯', frequency: tone.Gb[2] },
+  { id: '4-6', name: 'C♯', frequency: tone.Db[3] },
+  { id: '4-7', name: 'G♯', frequency: tone.Ab[2] },
+  { id: '4-8', name: 'D♯', frequency: tone.Eb[3] },
+  { id: '4-9', name: 'A♯', frequency: tone.Bb[2] },
+  { id: '4-10', name: 'E♯', frequency: tone.F[2] },
 ]
 
 export const layoutC = { one, two, three, four }
