@@ -139,7 +139,7 @@
             {#each layout[row] as button}
               <div
                 class={`circle ${activeButtonIdMap[button.id] ? 'active' : ''} ${
-                  button.name.includes('♭') ? 'accidental' : ''
+                  button.name.includes('♭') || button.name.includes('♯') ? 'accidental' : ''
                 }`}
                 id={button.id}
                 on:mousedown={() => handleClickNote(button.id)}
